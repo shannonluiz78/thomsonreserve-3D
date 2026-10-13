@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://shannonluiz78.github.io/thomsonreserve-3D/sitemap.xml
+# Project-path robots.txt is not a host-root crawler policy. See SEO notes.

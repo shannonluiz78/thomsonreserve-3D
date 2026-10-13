@@ -1,8 +1,14 @@
-# Thomson Reserve V9.7 — GitHub upload guide
-Prepared 13 October 2026. Buyer reports have been removed.
+# Thomson Reserve V9.8 — GitHub upload guide
+Prepared 14 October 2026. Buyer reports have been removed.
+
+## Choose your package
+- Already uploaded the complete V9.7 website? Use **Thomson_Reserve_V9_8_Update_From_V9_7.zip**. Extract it and copy all its contents into the same publishing folder, replacing matching files. Your existing assets folder stays in place. This small update includes no replacement images.
+- Starting fresh, or unsure whether V9.7 is complete? Use **Thomson_Reserve_GitHub_Upload_V9_8.zip**, which contains the complete website and all images.
+- Commit the changed files in GitHub Desktop, then Push origin. Preserve the folder structure and the branch/folder configured in Settings → Pages.
+- After Pages deploys, refresh with Ctrl+F5. The footer should show PRIVATE V9.8, the Buyer FAQs should be visible and release.json should show private-v9.8-seo-responsive.
 
 ## Which file to use
-Extract **Thomson_Reserve_GitHub_Upload_V9_7.zip** using Windows **Extract All**. Upload the extracted website files, including the assets folder. Do not upload the ZIP itself or the large standalone HTML.
+Extract **Thomson_Reserve_GitHub_Upload_V9_8.zip** using Windows **Extract All**. Upload the extracted website files, including the assets folder. Do not upload the ZIP itself or the large standalone HTML.
 
 Your existing page loaded its HTML but returned 404 for required scripts and styles. The complete folder fixes that missing-file problem.
 
@@ -11,7 +17,7 @@ This is still a private review build. Public distribution rights for developer d
 ## Recommended: GitHub Desktop
 1. Open GitHub Desktop and sign in. Choose **File → Clone repository → URL**. Enter https://github.com/shannonluiz78/thomsonreserve-3D and choose a local folder. If already cloned, select that repository and fetch/pull its latest changes first.
 2. In the repository's GitHub website, check **Settings → Pages** to find the current publishing branch and folder. This package works with **Deploy from a branch** and either **/(root)** or **/docs**. If the site uses an existing Actions workflow, inspect its upload directory before changing it.
-3. Keep a backup of the existing website outside the repository. Copy the extracted package's **contents** into the publishing folder, replacing matching filenames. Keep the repository's .git folder and any unrelated files. Do not create an extra nesting folder called Thomson_Reserve_GitHub_Upload_V9_7 inside the publishing folder.
+3. Keep a backup of the existing website outside the repository. Copy the extracted package's **contents** into the publishing folder, replacing matching filenames. Keep the repository's .git folder and any unrelated files. Do not create an extra nesting folder called Thomson_Reserve_GitHub_Upload_V9_8 inside the publishing folder.
 4. Check that index.html, payment-core.js, funnel-ui.js and assets/ are together in that folder. The entire assets/furnished/ and assets/plans/ folders are required.
 5. In GitHub Desktop review the changed files. Do not add the private Work Package, old report PDFs, evidence folders, credentials or standalone HTML. Commit with a clear title such as “Update unit explorer, pricing and furnishing; remove reports”.
 6. Once the content is cleared for publication, **Push origin**. Follow existing branch protections if shown. If using branch publication, Settings → Pages should point to the branch you pushed and the correct root/docs folder; save if needed.
@@ -41,8 +47,8 @@ GitHub's web uploader accepts at most 100 files per upload, each no larger than 
 4. If choosing a new branch, merge it into the branch configured for Pages after reviewing its complete contents. Uploading files to a different branch does not update the published page.
 
 ## Five-minute check after upload
-- Footer identifies PRIVATE V9.7 and there are no buyer-report buttons or contact-gate forms.
-- https://shannonluiz78.github.io/thomsonreserve-3D/release.json shows version private-v9.7-no-report.
+- Footer identifies PRIVATE V9.8 and there are no buyer-report buttons or contact-gate forms.
+- https://shannonluiz78.github.io/thomsonreserve-3D/release.json shows version private-v9.8-seo-responsive.
 - https://shannonluiz78.github.io/thomsonreserve-3D/payment-core.js returns JavaScript text, not a 404 page.
 - Choose Block 1, Stack 04, level 13: estimated price should be S$2,218,000 under Reference PSF. At 75% LTV, 2% interest and 25 years, monthly payment rounds to S$7,051.
 - Compare original BPS1 and proposed furnishing side by side, then choose a patio variant and another bedroom category. Images should load.
@@ -65,3 +71,7 @@ Checked 13 October 2026:
 - [Configure Pages publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 - [Clone with GitHub Desktop](https://docs.github.com/en/desktop/adding-and-cloning-repositories/cloning-and-forking-repositories-from-github-desktop)
 - [Upload files and limits](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository)
+
+
+## SEO and device update
+Read SEO_AND_MOBILE_NOTES.md for Search Console setup and indexing limits. Check release.json for private-v9.8-seo-responsive and confirm Buyer FAQs are visible. Phone and iPad layouts include larger inputs, touch controls and stacked comparisons.
