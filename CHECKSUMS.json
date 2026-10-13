@@ -1,0 +1,789 @@
+{
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "apartment-plan.js",
+      "bytes": 4191,
+      "sha256": "a4cdbf1e5860b55e3f4304eff103dc798428aa86f709dea1122f05d447712a06"
+    },
+    {
+      "path": "apartment-viewer.js",
+      "bytes": 14973,
+      "sha256": "e1005b1d527aa434d408e3e1e9dd54cc98eb781fc448050992ccabc06975e543"
+    },
+    {
+      "path": "apartment.css",
+      "bytes": 2397,
+      "sha256": "19455e9212a192c5d92cd703ef439766a13970d818d521331767452e7d228348"
+    },
+    {
+      "path": "assets/bps1-kitchen-reference.png",
+      "bytes": 55052,
+      "sha256": "0a5265dc75f15af0221bf6dfe534fa05a75a6dfd96f452edcbb9908058e11443"
+    },
+    {
+      "path": "assets/furnished/B1-furnished-v94.png",
+      "bytes": 1792558,
+      "sha256": "df7bb4a90504c9219ffa9958ca7cf26463ad72c0fa5e068fa08e189da3ff36b1"
+    },
+    {
+      "path": "assets/furnished/B1p-furnished-v94.png",
+      "bytes": 1705054,
+      "sha256": "0946ee6051dbd4a4be57f3fd16a8fb360789438f57744cd522bc46af2787caac"
+    },
+    {
+      "path": "assets/furnished/B2-furnished-v94.png",
+      "bytes": 1798453,
+      "sha256": "e8d72461b6a4dec32018d54737dc6d68475498d68e9ca22350307966e03bac95"
+    },
+    {
+      "path": "assets/furnished/B2p-furnished-v95.png",
+      "bytes": 1819332,
+      "sha256": "84e99ea4e6a602d438839b2c939ad4e2ca11ce057eacef12465738a3c0731330"
+    },
+    {
+      "path": "assets/furnished/B3-furnished-v94.png",
+      "bytes": 1865369,
+      "sha256": "3344ffe6a63391bf3ae270ef39e1098bf6f31185fd123e89cd0c204e22177a2b"
+    },
+    {
+      "path": "assets/furnished/B3p-furnished-v95.png",
+      "bytes": 1860016,
+      "sha256": "b11c8c34cc983bfd10c4dcca361391b8facfda26306f3b303d09a1abc082ed10"
+    },
+    {
+      "path": "assets/furnished/BP1-furnished-v94.png",
+      "bytes": 1855875,
+      "sha256": "a2d959207cd91b56b6f228aa258ef815da1ac2fdbaf290765c370d6c21069012"
+    },
+    {
+      "path": "assets/furnished/BP1p-furnished-v95.png",
+      "bytes": 1855929,
+      "sha256": "8e7a946056137fa4d28438a4918f1bd1bd26785f75f19a17d8c3be592dd85119"
+    },
+    {
+      "path": "assets/furnished/BP2-furnished-v94.png",
+      "bytes": 1966924,
+      "sha256": "8ee37e2a1cc941396303faa9ab1ba3220066531858de4749d10a913bbc50b266"
+    },
+    {
+      "path": "assets/furnished/BP2L-furnished-v95.png",
+      "bytes": 1754622,
+      "sha256": "b5ac31a86a90dd1f592d0fb1f1738ef9483615a1118f1f0d82118441f938684d"
+    },
+    {
+      "path": "assets/furnished/BP2p-furnished-v95.png",
+      "bytes": 1915455,
+      "sha256": "9410ecba900abad5d167e4974fb4e1f7a5f4e5e3d6ea4d1af0ef2ce9886a498c"
+    },
+    {
+      "path": "assets/furnished/BP2pL-furnished-v95.png",
+      "bytes": 1737768,
+      "sha256": "3aa289f8ab744bf671ed6c1eac2f2138d34daa89ff282d28abbfb7403ec26234"
+    },
+    {
+      "path": "assets/furnished/BP3-furnished-v94.png",
+      "bytes": 1862613,
+      "sha256": "3bcf753a5644a054f72af47da5c1845c1eec7f07099f0fb1b9e85b5ce8e2ecea"
+    },
+    {
+      "path": "assets/furnished/BP3L-furnished-v95.png",
+      "bytes": 1784294,
+      "sha256": "39941c234e105cb3a9a338e5ec78b531cfb11d3fcbd63b9f31ce22ae4658cdcb"
+    },
+    {
+      "path": "assets/furnished/BP3p-furnished-v95.png",
+      "bytes": 1863355,
+      "sha256": "72b804172e7376952dcda6d52ed587fb7674a6fa9260f360f332864a7ff339da"
+    },
+    {
+      "path": "assets/furnished/BP4-furnished-v94.png",
+      "bytes": 1726609,
+      "sha256": "f35bed4f8cc37bd9c136f61af2d792b658fb52d55774fd767c0bf9ec2b9acd0c"
+    },
+    {
+      "path": "assets/furnished/BP4p-furnished-v95.png",
+      "bytes": 1731906,
+      "sha256": "5852cc0c3fdfbfb67c3b8fc0e2789957ad0b3e03151db5b1a1440327db256663"
+    },
+    {
+      "path": "assets/furnished/BP5-furnished-v94.png",
+      "bytes": 1812829,
+      "sha256": "5969d4315752a948a9a1295723b7e104fc5a3c49a5aa3c06038d14ac3b4b14f9"
+    },
+    {
+      "path": "assets/furnished/BP5p-furnished-v95.png",
+      "bytes": 1866833,
+      "sha256": "f57a7efaf95d1bac09dc4392013aab9720e11b08e258745e45c7e699daecb98c"
+    },
+    {
+      "path": "assets/furnished/BP6L-furnished-v95.png",
+      "bytes": 1695060,
+      "sha256": "b302c5a280d48281e2eaf53ae8bfa774489cb401fb1a67115fdac6f16c2f4ad1"
+    },
+    {
+      "path": "assets/furnished/BP6pL-furnished-v95-r2.png",
+      "bytes": 1728687,
+      "sha256": "9314e8b09f8419482e6c095f5089fba2dfbe8a29d1610988071451fd839922fd"
+    },
+    {
+      "path": "assets/furnished/BP7L-furnished-v95.png",
+      "bytes": 1875197,
+      "sha256": "d512539e2ec9debbd3647ad877f51c384d510f66faf9ff042657bdff2ff41bd8"
+    },
+    {
+      "path": "assets/furnished/BP7pL-furnished-v95-r2.png",
+      "bytes": 1728792,
+      "sha256": "0d60f7dff64fefc83233efec602bb999b349d785f4448de441f3e68e40365021"
+    },
+    {
+      "path": "assets/furnished/BP8-furnished-v94.png",
+      "bytes": 1830454,
+      "sha256": "46294ef8fa96fd28396d32cb4e48b42eeab3115f293d3a843eae4f03f138f6e3"
+    },
+    {
+      "path": "assets/furnished/BP8p-furnished-v95.png",
+      "bytes": 1771449,
+      "sha256": "db553320f6999f2d966198841b8cd17122863d464bdc61ede7983aa07c2419d9"
+    },
+    {
+      "path": "assets/furnished/BP9-furnished-v94.png",
+      "bytes": 1802385,
+      "sha256": "e335f41cf1144f4f87e0f35aaec1049d7152958013f172275c3b9c24d37885e4"
+    },
+    {
+      "path": "assets/furnished/BP9p-furnished-v95.png",
+      "bytes": 1749029,
+      "sha256": "324ef9e463224f79c02d7872b704ac8a750d96d418ccc944c58c07e19773c655"
+    },
+    {
+      "path": "assets/furnished/BPS1-furnished-trial.png",
+      "bytes": 1835692,
+      "sha256": "af0d492cd064f902e48d17a4c2a8efa3d0f322c9f8fe62c96bb2413758008f4c"
+    },
+    {
+      "path": "assets/furnished/BPS1p-furnished-v94.png",
+      "bytes": 1763539,
+      "sha256": "c92f2301fd1cfcb9f29ceb5f06bf75d74ae6f992ef12d7add6b69602df562148"
+    },
+    {
+      "path": "assets/furnished/BPS2L-furnished-v95-r2.png",
+      "bytes": 1810069,
+      "sha256": "99c5ac979a69149e3071e5542eeb1f8547436bc3f60256acf1f2ff03de54a719"
+    },
+    {
+      "path": "assets/furnished/BPS2pL-furnished-v95-r2.png",
+      "bytes": 1756191,
+      "sha256": "eec510801ab3b1469addb29f88664d0543fcee747dacb6c61441189bfaba4062"
+    },
+    {
+      "path": "assets/furnished/BPS3L-furnished-v95.png",
+      "bytes": 1759199,
+      "sha256": "5902751062aec8441fe7cdc426376f4125f5794df5ec0f6df91a5c0e87449ee2"
+    },
+    {
+      "path": "assets/furnished/BPS3pL-furnished-v95.png",
+      "bytes": 1720699,
+      "sha256": "f02c782764b8e502e3c1a0c35f47c16b38ca4e6b4eb53bd00f413efc6f909020"
+    },
+    {
+      "path": "assets/furnished/BPS4-furnished-v94.png",
+      "bytes": 1816219,
+      "sha256": "a3633661f6ea18efa8a3045d4fb664f13c6f14c9da7b06631799f5f2e8f0bd68"
+    },
+    {
+      "path": "assets/furnished/BPS4L-furnished-v95.png",
+      "bytes": 1856542,
+      "sha256": "4cbe9403dd55a2ae077ebdbe7f3d451382daebdbc98494088b1b82cfd49bfdd6"
+    },
+    {
+      "path": "assets/furnished/BPS4p-furnished-v95.png",
+      "bytes": 1968409,
+      "sha256": "7e8435eae663d28a11995ddda9c20cff6648545ca064edade6649011c83affb7"
+    },
+    {
+      "path": "assets/furnished/BPS4pL-furnished-v95-r2.png",
+      "bytes": 1702135,
+      "sha256": "a4774c8d99a37be55e3aed92e9bf6a8b7ff2e9ff795ee23cdd3010c7c927128e"
+    },
+    {
+      "path": "assets/furnished/C1-furnished-v95.png",
+      "bytes": 1889466,
+      "sha256": "372842eebee0beb8635999cd3c2b28c75c3b600cc5270ca4a8737441b47655f2"
+    },
+    {
+      "path": "assets/furnished/C1p-furnished-v95.png",
+      "bytes": 1881519,
+      "sha256": "49f09bc510c746313e4cbab23fbe8214bfc9f91b7055824dbaa07b5c40a451ab"
+    },
+    {
+      "path": "assets/furnished/C2-furnished-v95.png",
+      "bytes": 1762174,
+      "sha256": "9ec66b29513f20b539bf463bfa8b57815bb1036e1312686f0f1f293b2e0af7db"
+    },
+    {
+      "path": "assets/furnished/C2p-furnished-v95.png",
+      "bytes": 1686431,
+      "sha256": "5578cb1768ac3ff1bede624cbcb801610eec0a809665b44312f6031c3be9cf2d"
+    },
+    {
+      "path": "assets/furnished/C3L-furnished-v95.png",
+      "bytes": 1742022,
+      "sha256": "233bc81730bde6d38cf5448001f0464aa93928444d0badaedd2fd0b0e4022396"
+    },
+    {
+      "path": "assets/furnished/C3pL-furnished-v95-r2.png",
+      "bytes": 1792672,
+      "sha256": "e0c2e5b46185a24e43df322928af875c2c9b79ff8927108b0b4fa29c1920c73d"
+    },
+    {
+      "path": "assets/furnished/C4-furnished-v95.png",
+      "bytes": 1829504,
+      "sha256": "c5daa54ac04e11d3d9a9efb4d7fcc4ca774511a1c1d95b254eb15ef3b2ed7e57"
+    },
+    {
+      "path": "assets/furnished/C4p-furnished-v95.png",
+      "bytes": 1735362,
+      "sha256": "aff972ffa0744e3aaab8372860447047d5e7e3ba135454e19b335263e207c374"
+    },
+    {
+      "path": "assets/furnished/C5L-furnished-v95.png",
+      "bytes": 2027640,
+      "sha256": "4963373245d3781a6470d897eee00b81a1f2aa8863aa98835d372620600c60c4"
+    },
+    {
+      "path": "assets/furnished/C5pL-furnished-v95.png",
+      "bytes": 1928755,
+      "sha256": "12fee30de54c017a67393130f07f6722edfc4e90fc32adce6ae8828210cd8e73"
+    },
+    {
+      "path": "assets/furnished/CP1-furnished-trial.png",
+      "bytes": 1877360,
+      "sha256": "54c09d38e3db8298c37b6e12156af246786957e8e80993c42db60c578fb3df27"
+    },
+    {
+      "path": "assets/furnished/CP1p-furnished-v95.png",
+      "bytes": 1896612,
+      "sha256": "3a54b15c38a07472cb967c6f40f4fd82cf466f255f16a0832543d82c36cc4893"
+    },
+    {
+      "path": "assets/furnished/CP2-furnished-v95.png",
+      "bytes": 1944127,
+      "sha256": "cc8a7e377e492e7d41c01f847a90fa9bf4dbd32744dae50eca9370760d395c10"
+    },
+    {
+      "path": "assets/furnished/CP2p-furnished-v95.png",
+      "bytes": 1837416,
+      "sha256": "e21485612491fdb0631263c6b3f5f29971d0888d265d182e53da86e6a8ee19a2"
+    },
+    {
+      "path": "assets/furnished/CP3-furnished-v95.png",
+      "bytes": 1904289,
+      "sha256": "63bc827bb09ab10072752198113ebeec240ed63d56fdf6619bbe8cfd87aca6bf"
+    },
+    {
+      "path": "assets/furnished/CP3p-furnished-v95.png",
+      "bytes": 1756332,
+      "sha256": "90581b47335fdde541b72e73336f9a2441ad7f03c6c4b00854d1a55efe099a36"
+    },
+    {
+      "path": "assets/furnished/CP4-furnished-v95.png",
+      "bytes": 1927039,
+      "sha256": "6a6fad76c17fa4ce1d2528ae8be10966f4a6da884da58baf69f21fd9b8cf6612"
+    },
+    {
+      "path": "assets/furnished/CP4p-furnished-v95.png",
+      "bytes": 1956254,
+      "sha256": "faf2c41a6ce19704d3148713b1a2b0debde98a88bb7b456e971e59055c52003f"
+    },
+    {
+      "path": "assets/furnished/CP5-furnished-v95.png",
+      "bytes": 1767425,
+      "sha256": "6cb741eca4f29bd8980703d0db254f6288f406243b8b693da99a6b2e6a31d516"
+    },
+    {
+      "path": "assets/furnished/CP5p-furnished-v95.png",
+      "bytes": 1933205,
+      "sha256": "0e4715a3b7fe9eafc05f3dafbead29608f9497bc8ce8f5406cddbf0192c1fa2c"
+    },
+    {
+      "path": "assets/furnished/CP6-furnished-v95.png",
+      "bytes": 1807752,
+      "sha256": "6b852dab4eecbdea1b2c2dbc7ba7ba122f27a209c1636f85855bce9030ad2acf"
+    },
+    {
+      "path": "assets/furnished/CP6p-furnished-v95.png",
+      "bytes": 1987222,
+      "sha256": "d37c20e42e0d776f33cc4b6f8e0bfc4af439b8b3bac02f641e1f90e76707e830"
+    },
+    {
+      "path": "assets/furnished/CP7L-furnished-v95.png",
+      "bytes": 1742541,
+      "sha256": "32cc6de3739a7c811f38519879b5e9129b119a7cd5ec6b4da93676a38372ddb6"
+    },
+    {
+      "path": "assets/furnished/CP7pL-furnished-v95.png",
+      "bytes": 1817476,
+      "sha256": "de8178c769d6cd5a5daf54f90eccfa0db94b7fff316657ce7ea46ee9f061ca24"
+    },
+    {
+      "path": "assets/furnished/CPS1-furnished-v95.png",
+      "bytes": 1822959,
+      "sha256": "a0d1ff305c06a687fa58084f9f36edfa896e493d7bbb5fd6f215237698db3052"
+    },
+    {
+      "path": "assets/furnished/CPS1p-furnished-v95.png",
+      "bytes": 1969071,
+      "sha256": "3db96801b079938c83f1c3158129323a7490aee5a226ae82d43a2e0d8a005c7f"
+    },
+    {
+      "path": "assets/furnished/CPS2-furnished-v95.png",
+      "bytes": 1884390,
+      "sha256": "f6f010a22d4c5d5a5d2b55b3c5ed823eea668f02210ad073fa4a497f833043ff"
+    },
+    {
+      "path": "assets/furnished/CPS2p-furnished-v95.png",
+      "bytes": 1989455,
+      "sha256": "7d940500e53567dc0a9b1181d080d9e30180846c5e2e8818d9feb7cde87d3757"
+    },
+    {
+      "path": "assets/furnished/D1-furnished-v95.png",
+      "bytes": 1840300,
+      "sha256": "79cf075d9380e8b710d40c40c216f799e8c817ce7306e3229d19e42cfba4ed8a"
+    },
+    {
+      "path": "assets/furnished/D1p-furnished-v95.png",
+      "bytes": 1957824,
+      "sha256": "2a7bb009ef6fc3e3bdb1d2ddfa1bd138aa841c83c70a0bc7c9b03f68001f30a6"
+    },
+    {
+      "path": "assets/furnished/D2-furnished-v95.png",
+      "bytes": 1830865,
+      "sha256": "61a14a045809f7492f1d1253f79909c8e8422492dba47fce4e9321df9268c139"
+    },
+    {
+      "path": "assets/furnished/D2p-furnished-v95.png",
+      "bytes": 1811236,
+      "sha256": "e1760d3f9e1107f44a66db695c9782a1edec348bc293bbb24b6b6935219b8840"
+    },
+    {
+      "path": "assets/furnished/D3-furnished-v95.png",
+      "bytes": 1865102,
+      "sha256": "59e3a5b02fdb8446c8df5c37321e50148f59d6e73cdedf0ff9ac6316ecc49195"
+    },
+    {
+      "path": "assets/furnished/D3p-furnished-v95-r2.png",
+      "bytes": 1789776,
+      "sha256": "4b6b82338af826566196827a8fecc75e3a2ec74745c113ab1497ecfdf57dd9a3"
+    },
+    {
+      "path": "assets/furnished/D4L-furnished-v95.png",
+      "bytes": 1906726,
+      "sha256": "c7d026adf0dc680ba7f9da8439828e93d0b6e8575ede40987b3c2dc99ddcd711"
+    },
+    {
+      "path": "assets/furnished/D4pL-furnished-v95.png",
+      "bytes": 1926976,
+      "sha256": "10326035c56f3b1ae6c4d75d1ad56dd44aaf496bbed10485bedce8c4ed86ec27"
+    },
+    {
+      "path": "assets/furnished/DP1L-furnished-trial.png",
+      "bytes": 1868410,
+      "sha256": "a75c24def85e3c284600023b503458dbcab98e737e5050dc38d9b9837d85fb3e"
+    },
+    {
+      "path": "assets/furnished/DP2L-furnished-v95.png",
+      "bytes": 1995790,
+      "sha256": "d72ec24517cb4d6b0db48192f1902aa443022604ff210f8339d02cd27ce89142"
+    },
+    {
+      "path": "assets/furnished/DPS1L-furnished-v95.png",
+      "bytes": 1865266,
+      "sha256": "7d6080059f014ecbb20a946207f78d141606e3727f6002eeda9292723fa739dd"
+    },
+    {
+      "path": "assets/furnished/E1L-furnished-trial.png",
+      "bytes": 1872427,
+      "sha256": "7f40668b9c8434d286a6805af61e60e1453e36ee75e334a5a8cbf3ff5f2cdf2a"
+    },
+    {
+      "path": "assets/hero.jpg",
+      "bytes": 5521603,
+      "sha256": "86b7486483322f33141c1a145ea19fea27b0bf0ed59a13983228fa62e553e058"
+    },
+    {
+      "path": "assets/luiz-portrait.png",
+      "bytes": 1918557,
+      "sha256": "930778ee191e143fe979d12041fa7fd796715e3047cdae2b511e96fb2e39d5bb"
+    },
+    {
+      "path": "assets/luiz-profile-card.jpeg",
+      "bytes": 144668,
+      "sha256": "dc2efd57aec3d16e0b96c5026e60b749ec0b6129c1e21ec8e6d5a34eee55b8de"
+    },
+    {
+      "path": "assets/luiz-whatsapp-qr.png",
+      "bytes": 66306,
+      "sha256": "095a4d191eb700db7bb260a892ff4fd14ab0e678d4695072582b0fae0ff14515"
+    },
+    {
+      "path": "assets/modern-decor-reference.png",
+      "bytes": 1699651,
+      "sha256": "b498c89eb43aadbb92e865831f229d1aa3cab36f6a1dd3bdc9031e664540d8f5"
+    },
+    {
+      "path": "assets/onemap-logo.png",
+      "bytes": 1514,
+      "sha256": "657db347017b13e71bc4942afbe985566052446b13433f2dd5492e92fce34f16"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-b1-2br.jpg",
+      "bytes": 196776,
+      "sha256": "5925ff4d1299caa82bc3e0ee6dad597142d04868540bbdac069375bf55601393"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-b2-2br.jpg",
+      "bytes": 183744,
+      "sha256": "60ed93787e1175b427588787ce73c93fdbda3d5a63fd42c7a3c075b230561a36"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-b3-2br.jpg",
+      "bytes": 194360,
+      "sha256": "f90436b0a6468a7142cde207e54002c3597cd47097d8857587d9fa2a2ecd7151"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp1-2br-premium.jpg",
+      "bytes": 203117,
+      "sha256": "c96eb96f0e0db035986e3113ddcf60af3a78fe8b6b5043b0452b3bc7a363bb00"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp2-2br-premium.jpg",
+      "bytes": 196221,
+      "sha256": "ca0ce108c33abab558a612d27acb9db89139f4e9742f171a2659304d7982423a"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp2l-2br-premium-private-lift.jpg",
+      "bytes": 198165,
+      "sha256": "d31eb40c31cca41f811752d3cf64d75165aa02bb497c446385f5be9c50220b52"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp3-2br-premium.jpg",
+      "bytes": 217989,
+      "sha256": "4738e281f9933ff7b7c22105881fb9d5e2269f2650a48c60551299b97d99ca95"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp3l-2br-premium-private-lift.jpg",
+      "bytes": 180415,
+      "sha256": "ac57166989f3cebcf712dd5aa1a74f028e0b79e29e5feb25cc102031c984303f"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp4-2br-premium.jpg",
+      "bytes": 203215,
+      "sha256": "56b49bf5e8230243f07d66eba9be5ca3fd6cb1d0cd3ab48a2c924a7f79e69f46"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp5-2br-premium.jpg",
+      "bytes": 195437,
+      "sha256": "9da0de2ab3198d988eb981a4658c2456de0869da6256ec3e82d4b9286898755f"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp6l-2br-premium-private-lift.jpg",
+      "bytes": 219439,
+      "sha256": "b8157153bece8facbbcccf6fe76046ec63d4487f3e3bf82b37d3a4bae442aa51"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp7l-2br-premium-private-lift.jpg",
+      "bytes": 197602,
+      "sha256": "c13fa07a47a165b2b1434aac0023b987fe50961536b05b94dc5ea4d9c255349e"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp8-2br-premium.jpg",
+      "bytes": 195016,
+      "sha256": "674b458ac6528f2281b4373a9e2052984e3944324404c395a849da8c1aca7a3b"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bp9-2br-premium.jpg",
+      "bytes": 194229,
+      "sha256": "40a5f1b005d376fc1750c291e3b2d7329b58ac3494482b0fc1b91e62c33d74d8"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bps1-2br-premium-study.jpg",
+      "bytes": 220492,
+      "sha256": "fa2a707997646f21ca2fd3acd05aadd1a7ddb28bda79f5543c9c0ef3d6641392"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bps2l-2br-premium-study-private-lift.jpg",
+      "bytes": 213373,
+      "sha256": "8155cd1522d1a6ecb6fd079252f92e678ddf90f5058951fb3f45fb1f58af0bd3"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bps3l-2br-premium-study-private-lift.jpg",
+      "bytes": 201975,
+      "sha256": "1a78f788832a0d1a50734bf59078856c92aef8aacac59d8677c18ddd6445c084"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bps4-2br-premium-study.jpg",
+      "bytes": 199642,
+      "sha256": "bb5ff8310b104575538aff0d7a179bf06f1adf902d7b443e55a897a2b32e91f6"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-bps4l-2br-premium-study-private-lift.jpg",
+      "bytes": 208631,
+      "sha256": "bf82c456f9507f40a80be68a9ad58d8d3de2033067559b45d96cf7996498ed13"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-c1-3br.jpg",
+      "bytes": 215672,
+      "sha256": "acb3b05fa4cf3f30f500ee341b0b98d0ae014b00291adbf32dc017d2c2c81c6d"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-c2-3br.jpg",
+      "bytes": 213823,
+      "sha256": "d82af09323c4311a8176e8c99d67c50f988ef78723c70ddece2503f13421f01d"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-c3l-3br-private-lift.jpg",
+      "bytes": 213291,
+      "sha256": "97df4ff159b6649a3cca5408b903681c061981ded71eef8f82eb175063146f60"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-c4-3br.jpg",
+      "bytes": 216742,
+      "sha256": "7bca12dfd0061ae48c31b923727cd167de13fa80128133ae657013a60122ef1e"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-c5l-3br-private-lift.jpg",
+      "bytes": 218178,
+      "sha256": "a71503981bbb0a5131c4da50c005ea86fc0b12ec797d810bda45a9ca6fe4ab5b"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-cp1-3br-premium.jpg",
+      "bytes": 233374,
+      "sha256": "77fe81fb261860abbd6276100bb1c8e2a08d6eba37282906c8bb5b4a79db3f23"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-cp2-3br-premium.jpg",
+      "bytes": 228378,
+      "sha256": "4b7af47d1190f792650392e9144b771f029f0b0b36e2b26afcf8613f70ae636a"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-cp3-3br-premium.jpg",
+      "bytes": 227917,
+      "sha256": "d405d4e13d486213f1f782fa5e3af03d2d8427cd8f59f0607b342e1fd340e09d"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-cp4-3br-premium.jpg",
+      "bytes": 227566,
+      "sha256": "7ccae242c7c69c5b31ac8e9069852d2b86b1de20a7adb32c82264e3af2665f27"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-cp5-3br-premium.jpg",
+      "bytes": 226498,
+      "sha256": "e546be6089648dead4dc61cc5c119679e0deb2c66625f5a453dc25d8ad2cc2d1"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-cp6-3br-premium.jpg",
+      "bytes": 225303,
+      "sha256": "b518480768ad73880d83e47e919354420f2771f11a6b5f485057f127a46c5eb0"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-cp7l-3br-premium-private-lift.jpg",
+      "bytes": 229379,
+      "sha256": "752124ff5d26f1b9d3190217036717934658098cff96c3ddf58bbcf36d07ed2a"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-cps1-3br-premium-study.jpg",
+      "bytes": 242661,
+      "sha256": "94f4c61720503baea2a2652b265d1ef3e273bf287bbc7e308549f33572a1e96f"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-cps2-3br-premium-study.jpg",
+      "bytes": 234090,
+      "sha256": "d01dada4276e64ad17d93a0360ef731eb3c63526c9b46c37f28de00c5dd308b3"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-d1-4br.jpg",
+      "bytes": 238498,
+      "sha256": "89e6cae4ef7348b568949538c8a2b041f926c3191f646d93b32277cdc31b2b40"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-d2-4br.jpg",
+      "bytes": 239891,
+      "sha256": "e94063a1c2945ed5874a92c2ddd31b06983774828d1da5c5b37f94aa5f497cbd"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-d3-4br.jpg",
+      "bytes": 237376,
+      "sha256": "7226bf45f594d7bde83437b35c13a622c1952886ffac5b3a11a61c1db3eb8c6c"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-d4l-4br-private-lift.jpg",
+      "bytes": 241080,
+      "sha256": "5e54d679c2dec67e0597c608c9b4dafaea3085cb9c715e50d74b4167842ce96a"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-dp1l-4br-premium-private-lift.jpg",
+      "bytes": 246048,
+      "sha256": "b909208c742a17880fd36d6b0c5baa4dee75c7e2f8cac3eea9df8beb33cd1ef2"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-dp2l-4br-premium-private-lift.jpg",
+      "bytes": 241225,
+      "sha256": "cd82e8fa1f8fea64b3b6d9fb677aab2523dc5a432b6f56ce51f9c68e14bba46a"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-dps1l-4br-premium-study-private-lift.jpg",
+      "bytes": 254590,
+      "sha256": "331969a5f1636b44d26eb465eb2cd79a6e83219bc0482d59e19e75f36a4733c9"
+    },
+    {
+      "path": "assets/plans/thomson-reserve-fullplan-e1l-5br-suite-private-lift.jpg",
+      "bytes": 274734,
+      "sha256": "5110ef86eceb917c37508c2ecdfe72578ebbfafb68c802e4257c103d7aa617a1"
+    },
+    {
+      "path": "assets/site-plan-with-legends.jpg",
+      "bytes": 186956,
+      "sha256": "8526bf94603392c46c605eabc427645bf79caa9d96f954995ec3e37dbc39c63a"
+    },
+    {
+      "path": "assets/site-reference.jpeg",
+      "bytes": 270859,
+      "sha256": "7fda037a1fb000447f4c21064b3286d79848910db62962fe7409d1fdda5951dc"
+    },
+    {
+      "path": "assets/three.min.js",
+      "bytes": 603445,
+      "sha256": "9274bbcec8d96168626c732b5d31c775aa8cfb7eaa0599bec0c175908a2c1ce2"
+    },
+    {
+      "path": "assets/unit-mix-floor-rule-reference-20261012.png",
+      "bytes": 145651,
+      "sha256": "c224e777b242751946d04e3df15a2835ed32b49911ef3cedee79df7573e77e46"
+    },
+    {
+      "path": "assets/unit-mix-price-reference-20261012.png",
+      "bytes": 145651,
+      "sha256": "c224e777b242751946d04e3df15a2835ed32b49911ef3cedee79df7573e77e46"
+    },
+    {
+      "path": "assets/viewout.jpg",
+      "bytes": 1130387,
+      "sha256": "738a2df48e1ad47a9c25b8108a136c4c0958d25debe53bffee13aacbdf87f6a4"
+    },
+    {
+      "path": "buyer-review.css",
+      "bytes": 3445,
+      "sha256": "efe2bf6688cb4cbba2aa793f907a200d9c99948bd7c96640b535b164bef13e05"
+    },
+    {
+      "path": "buyer-review.js",
+      "bytes": 5164,
+      "sha256": "53962db1fc8d2d3a0d4156e7d8e3edd0286543bae5fe489b91f838008b0cc397"
+    },
+    {
+      "path": "funnel-core.js",
+      "bytes": 13740,
+      "sha256": "2a16ccd547dc5920e6077a6fe94f3b6554e59683a325c7e22383b19139a31ff6"
+    },
+    {
+      "path": "funnel-ui.js",
+      "bytes": 12549,
+      "sha256": "81ad4808b66fd647f422ef58f5b59d0669762b1b89830c8b9107701daed23847"
+    },
+    {
+      "path": "funnel.css",
+      "bytes": 13199,
+      "sha256": "9e12e6ab515fd403ef445dd954160e745d9f5b4a420eba8b5c1180129f3dad27"
+    },
+    {
+      "path": "furnished-images.js",
+      "bytes": 44987,
+      "sha256": "ec95951409ba153ac8a5a10fdcf17eda52cb17dbb07f55a2d327dee7c37d6fd9"
+    },
+    {
+      "path": "index.html",
+      "bytes": 697676,
+      "sha256": "b8a5eb00aea71692bb9209b9c47c40049de7ee0e577b52916c8ab766f69b996d"
+    },
+    {
+      "path": "library-ui.js",
+      "bytes": 3880,
+      "sha256": "37327c87aef91275c17c547a65aa6479073b7027577a2e4487fcad88e55f72c5"
+    },
+    {
+      "path": "licenses/SOURCE_NOTES.md",
+      "bytes": 1607,
+      "sha256": "1deaf3da930ab655cb348a3296f0441de70556267e165c5d14eec9b7974b5884"
+    },
+    {
+      "path": "licenses/SunCalc-LICENSE.txt",
+      "bytes": 1322,
+      "sha256": "e8881f5d09f1f3c5e0e6ad4c2120521bad1079246a2af84d756af8ab1a53da3c"
+    },
+    {
+      "path": "licenses/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "7dddf7c5b8fd10ee654db8857d75d104b5557889aa5a91fc4ca545ea7c07062f"
+    },
+    {
+      "path": "payment-core.js",
+      "bytes": 2489,
+      "sha256": "ca17a625674b827d16496fd2183f24d5ddcecfa841b8b8f7e38bf688f58ea378"
+    },
+    {
+      "path": "payment-ui.js",
+      "bytes": 15036,
+      "sha256": "29724a5939955d8ed02351f19337918916c3194196bec442f76083a2658173e3"
+    },
+    {
+      "path": "payment.css",
+      "bytes": 4531,
+      "sha256": "15ab0817af00542169010aed5edf1c3e00739e223f85df2d4016789e8093db54"
+    },
+    {
+      "path": "plan-models.js",
+      "bytes": 227817,
+      "sha256": "4b7937649af74772129b5dc36341b532521d38f87ce5c0ea493f54fe6ec64af9"
+    },
+    {
+      "path": "release.json",
+      "bytes": 280,
+      "sha256": "2d54ccd72d1ef1e7bf604874554f21c62f1fd83969bf8269ad2e2fb3ad52d143"
+    },
+    {
+      "path": "shadow-model.js",
+      "bytes": 1091,
+      "sha256": "a4984c3f7d99429b98e07f3fd980a826948dbb8c0002b516eea5337269861152"
+    },
+    {
+      "path": "site-geometry.js",
+      "bytes": 8173,
+      "sha256": "923eeba920196d546a1d640e32533bd2a023bf576c657b3fb590508884ba8ced"
+    },
+    {
+      "path": "site-viewer.css",
+      "bytes": 1958,
+      "sha256": "a91503c27efa5049471c6c7a05c649b1f86d11ddcf9b9e2aed9c13babdb8ab2b"
+    },
+    {
+      "path": "site-viewer.js",
+      "bytes": 15173,
+      "sha256": "565b883286d5f2620fa81ccb56040520b21e2a5b69df82788b13c4f22f543a8c"
+    },
+    {
+      "path": "unit-library.js",
+      "bytes": 393744,
+      "sha256": "54e118ea4d9efc4db4c0df74bfe17bdf8fc0d912dfeeb147ce3155f113fa7a17"
+    },
+    {
+      "path": "UPLOAD_GUIDE.md",
+      "bytes": 6600,
+      "sha256": "54353a3443c29a6386acc4e14113dcb800b638ee2ca9c96e01d92d9a5381c853"
+    }
+  ]
+}

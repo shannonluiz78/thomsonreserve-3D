@@ -1,0 +1,10 @@
+{
+  "version": "private-v9.7-no-report",
+  "prepared": "2026-10-13",
+  "units": 1268,
+  "originalSheets": 41,
+  "illustrationTypes": 77,
+  "buyerReports": false,
+  "priceBasis": "RTD estimate: round(sqft*(2850+15*(floor-1))/1000)*1000",
+  "publishedByThisTask": false
+}
