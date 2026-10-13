@@ -3,527 +3,654 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thomson Reserve | District 20 Official Launch Preview</title>
-  <meta name="description" content="Discover Thomson Reserve at 1-11 Bright Hill Drive. 1,268 luxury units next to Upper Thomson MRT and Ai Tong School. View 3D floor plans, indicative pricing & site plan." />
+  <title>Thomson Reserve | Interactive Project Portal & Stacking Chart</title>
+  <meta name="description" content="Official Interactive Portal for Thomson Reserve: Stacking Plan, OneMap 3D Location, 86 Facilities, 3D Floor Plans & Live Indicative Pricing." />
 
-  <!-- Tailwind CSS & FontAwesome CDN -->
+  <!-- Tailwind CSS & FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <!-- Leaflet CSS & JS for OneMap -->
+
+  <!-- Leaflet for SLA OneMap -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-    
-    :root {
-      --primary-navy: #0f1c2e;
-      --accent-gold: #c5a47e;
-      --accent-gold-dark: #a98357;
-      --neutral-slate: #f4f6f9;
-    }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      color: #334155;
-      background-color: #fdfdfd;
-      scroll-behavior: smooth;
+      background-color: #0b131f;
+      color: #e2e8f0;
+      overflow-x: hidden;
     }
 
-    .font-serif-luxury {
+    .font-luxury {
       font-family: 'Cinzel', Georgia, serif;
     }
 
-    .glass-nav {
-      background: rgba(15, 28, 46, 0.92);
-      backdrop-filter: blur(12px);
+    /* Custom Scrollbar for Stacking Chart */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f1c2e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #c5a47e;
     }
 
-    #onemap-container {
-      height: 480px;
+    #onemap-canvas {
+      height: 600px;
       width: 100%;
       border-radius: 1rem;
       z-index: 10;
     }
 
-    .unit-card.active {
-      border-color: #c5a47e;
-      background-color: #fdf9f4;
+    /* Stacking Matrix Unit Cell */
+    .unit-cell {
+      transition: all 0.15s ease-in-out;
+    }
+    .unit-cell:hover {
+      transform: scale(1.06);
+      z-index: 20;
+      box-shadow: 0 4px 14px rgba(197, 164, 126, 0.45);
     }
   </style>
 </head>
-<body class="antialiased selection:bg-[#c5a47e] selection:text-white">
+<body class="selection:bg-[#c5a47e] selection:text-[#0b131f]">
 
-  <!-- ================= TOP HEADER / NAVIGATION ================= -->
-  <header class="fixed top-0 inset-x-0 z-50 glass-nav border-b border-white/10 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <span class="text-2xl font-serif-luxury tracking-widest text-[#c5a47e] font-bold">THOMSON RESERVE</span>
-        <span class="hidden md:inline-block text-xs uppercase tracking-widest px-2.5 py-1 bg-white/10 text-slate-300 rounded">District 20 • D20</span>
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="sticky top-0 z-40 bg-[#0f1c2e]/90 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-luxury text-xl sm:text-2xl font-bold tracking-widest text-[#c5a47e]">THOMSON RESERVE</span>
+          <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#c5a47e]/20 text-[#c5a47e] border border-[#c5a47e]/40">D20 • 99-Yr</span>
+        </div>
+        <p class="text-[11px] text-slate-400 hidden sm:block">1, 3, 5, 7, 9, 11 Bright Hill Drive • 1,268 Bespoke Residences</p>
       </div>
-      <nav class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-wider text-slate-200">
-        <a href="#overview" class="hover:text-[#c5a47e] transition">Overview</a>
-        <a href="#location-map" class="hover:text-[#c5a47e] transition">3D Map</a>
-        <a href="#siteplan" class="hover:text-[#c5a47e] transition">Site Plan</a>
-        <a href="#pricing" class="hover:text-[#c5a47e] transition">Pricing & Units</a>
-        <a href="#floorplans" class="hover:text-[#c5a47e] transition">3D Floorplans</a>
-      </nav>
-      <div class="flex items-center space-x-3">
-        <a href="https://wa.me/6590000000?text=Hi%2C%20I%20would%20like%20to%20register%20for%20Thomson%20Reserve%20Showflat%20Preview%20and%20Price%20List." 
-           target="_blank"
-           class="bg-[#c5a47e] hover:bg-[#a98357] text-[#0f1c2e] font-semibold text-xs sm:text-sm uppercase tracking-wider px-4 sm:px-5 py-2.5 rounded-full transition shadow-lg flex items-center gap-2">
-          <i class="fa-brands fa-whatsapp text-lg"></i>
-          <span>VVIP Preview</span>
-        </a>
-      </div>
+    </div>
+
+    <!-- App View Navigation Pills -->
+    <div class="flex items-center gap-1 sm:gap-2 bg-[#09101a] p-1.5 rounded-xl border border-white/10 text-xs">
+      <button onclick="switchView('stacking')" id="tab-stacking" class="view-tab px-3 sm:px-4 py-2 rounded-lg font-semibold transition bg-[#c5a47e] text-[#0b131f]">
+        <i class="fa-solid fa-table-cells mr-1.5"></i><span class="hidden md:inline">Stacking</span> Chart
+      </button>
+      <button onclick="switchView('onemap')" id="tab-onemap" class="view-tab px-3 sm:px-4 py-2 rounded-lg font-semibold transition text-slate-300 hover:text-white">
+        <i class="fa-solid fa-map-location-dot mr-1.5"></i>OneMap 3D
+      </button>
+      <button onclick="switchView('floorplans')" id="tab-floorplans" class="view-tab px-3 sm:px-4 py-2 rounded-lg font-semibold transition text-slate-300 hover:text-white">
+        <i class="fa-solid fa-cube mr-1.5"></i>3D Floorplan
+      </button>
+      <button onclick="switchView('facilities')" id="tab-facilities" class="view-tab px-3 sm:px-4 py-2 rounded-lg font-semibold transition text-slate-300 hover:text-white">
+        <i class="fa-solid fa-water-ladder mr-1.5"></i>86 Facilities
+      </button>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a href="https://wa.me/6590000000?text=Hi%2C%20I%20am%20enquiring%20about%20Thomson%20Reserve%20VVIP%20Preview%20and%20Unit%20Allocation." 
+         target="_blank"
+         class="px-4 py-2 bg-[#c5a47e] hover:bg-[#a98357] text-[#0b131f] font-bold text-xs uppercase tracking-wider rounded-xl transition shadow flex items-center gap-2">
+        <i class="fa-brands fa-whatsapp text-sm"></i>
+        <span class="hidden sm:inline">WhatsApp Agent</span>
+      </a>
     </div>
   </header>
 
-  <!-- ================= HERO SECTION ================= -->
-  <section class="relative min-h-screen flex items-center justify-center pt-20 bg-[#0f1c2e] text-white overflow-hidden">
-    <!-- Background overlay / image placeholder -->
-    <div class="absolute inset-0 opacity-40 bg-cover bg-center mix-blend-luminosity scale-105 transform hover:scale-100 transition duration-1000"
-         style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80');">
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-t from-[#0f1c2e] via-[#0f1c2e]/60 to-transparent"></div>
+  <!-- ================= MAIN APP CANVAS CONTAINER ================= -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 text-center z-10 py-16">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#c5a47e]/20 border border-[#c5a47e]/40 text-[#c5a47e] text-xs uppercase tracking-widest font-semibold mb-6">
-        <span class="w-2 h-2 rounded-full bg-[#c5a47e] animate-ping"></span>
-        Official Preview Registration Open
-      </div>
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif-luxury tracking-wide mb-6 leading-tight">
-        A Sanctuary in the <br /><span class="text-[#c5a47e] italic">Heart of Nature</span>
-      </h1>
-      <p class="text-slate-300 max-w-2xl mx-auto text-base sm:text-lg mb-10 leading-relaxed font-light">
-        Nestled along Bright Hill Drive and Upper Thomson Road. 1,268 bespoke residences across 540,000+ sqft of elevated greenery, moments from Upper Thomson MRT and Ai Tong School.
-      </p>
+    <!-- ================= VIEW 1: STACKING PLAN & ELEVATION MATRIX ================= -->
+    <section id="view-stacking" class="block space-y-6">
+      
+      <!-- Filter Bar -->
+      <div class="bg-[#0f1c2e] p-4 rounded-2xl border border-white/10 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs uppercase font-bold text-slate-400 mr-2">Select Tower:</span>
+          <button onclick="changeBlock('Blk 1')" class="block-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#c5a47e] text-[#0b131f]" data-block="Blk 1">Block 1</button>
+          <button onclick="changeBlock('Blk 3')" class="block-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10" data-block="Blk 3">Block 3</button>
+          <button onclick="changeBlock('Blk 5')" class="block-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10" data-block="Blk 5">Block 5</button>
+          <button onclick="changeBlock('Blk 7')" class="block-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10" data-block="Blk 7">Block 7</button>
+          <button onclick="changeBlock('Blk 9 (Luxury 30-Storey)')" class="block-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10" data-block="Blk 9 (Luxury 30-Storey)">Block 9 (Luxury)</button>
+          <button onclick="changeBlock('Blk 11 (Luxury 30-Storey)')" class="block-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10" data-block="Blk 11 (Luxury 30-Storey)">Block 11 (Luxury)</button>
+        </div>
 
-      <!-- Key Snapshot Badges -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto mb-10">
-        <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-          <div class="text-2xl sm:text-3xl font-serif-luxury text-[#c5a47e] font-bold">1,268</div>
-          <div class="text-xs uppercase tracking-wider text-slate-300 mt-1">Exclusive Units</div>
-        </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-          <div class="text-2xl sm:text-3xl font-serif-luxury text-[#c5a47e] font-bold">6 Mins</div>
-          <div class="text-xs uppercase tracking-wider text-slate-300 mt-1">Upper Thomson MRT</div>
-        </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-          <div class="text-2xl sm:text-3xl font-serif-luxury text-[#c5a47e] font-bold">&lt; 1 km</div>
-          <div class="text-xs uppercase tracking-wider text-slate-300 mt-1">Ai Tong School</div>
-        </div>
-        <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-          <div class="text-2xl sm:text-3xl font-serif-luxury text-[#c5a47e] font-bold">86</div>
-          <div class="text-xs uppercase tracking-wider text-slate-300 mt-1">Lifestyle Facilities</div>
+        <!-- Legend -->
+        <div class="flex items-center gap-3 text-[11px] text-slate-400">
+          <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-blue-500 inline-block"></span> 2-BR (B1)</div>
+          <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-amber-500 inline-block"></span> 2-BR+S (BPS1)</div>
+          <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> 3-BR Prem (CP1)</div>
+          <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-purple-500 inline-block"></span> 4-BR Lift (DP1)</div>
         </div>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#pricing" class="w-full sm:w-auto px-8 py-3.5 bg-[#c5a47e] hover:bg-[#a98357] text-[#0f1c2e] font-bold uppercase tracking-wider text-xs rounded-full transition shadow-xl">
-          View Indicative Prices
-        </a>
-        <a href="#location-map" class="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-medium uppercase tracking-wider text-xs rounded-full border border-white/20 transition">
-          Explore OneMap 3D Location
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PROJECT OVERVIEW ================= -->
-  <section id="overview" class="py-24 bg-white border-b border-slate-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#c5a47e]">Prime District 20 Reimagined</span>
-        <h2 class="text-3xl sm:text-4xl font-serif-luxury text-slate-900 mt-2">Unrivaled Scale & Proven Pedigree</h2>
-        <p class="text-slate-600 mt-4 text-sm sm:text-base leading-relaxed">
-          Jointly developed by UOL Group, Singapore Land Group, and CapitaLand Development. Thomson Reserve offers two curated collections: The Classic Collection (four 21-storey towers) and The Luxury Collection (two 30-storey signature towers overlooking MacRitchie Reservoir).
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200/60 hover:shadow-lg transition">
-          <div class="w-12 h-12 rounded-full bg-[#c5a47e]/20 text-[#a98357] flex items-center justify-center text-xl mb-6">
-            <i class="fa-solid fa-tree"></i>
-          </div>
-          <h3 class="font-serif-luxury text-xl font-bold text-slate-900 mb-3">Greenery & Nature</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Perched beside MacRitchie Reservoir, Lower Peirce, and Bishan-AMK Park. Expansive unblocked green corridors with clean, open airflow and lush landscape coverage.
-          </p>
-        </div>
-
-        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200/60 hover:shadow-lg transition">
-          <div class="w-12 h-12 rounded-full bg-[#c5a47e]/20 text-[#a98357] flex items-center justify-center text-xl mb-6">
-            <i class="fa-solid fa-train-subway"></i>
-          </div>
-          <h3 class="font-serif-luxury text-xl font-bold text-slate-900 mb-3">Transit & Amenities</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            A 6-minute sheltered stroll to Upper Thomson MRT (TE8) and Bright Hill Interchange (TE7/CR13). Directly opposite Thomson Plaza with dining enclaves along Upper Thomson Road.
-          </p>
-        </div>
-
-        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-200/60 hover:shadow-lg transition">
-          <div class="w-12 h-12 rounded-full bg-[#c5a47e]/20 text-[#a98357] flex items-center justify-center text-xl mb-6">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div>
-          <h3 class="font-serif-luxury text-xl font-bold text-slate-900 mb-3">Elite Education Belt</h3>
-          <p class="text-sm text-slate-600 leading-relaxed">
-            Within the highly coveted 1 km home-school distance to Ai Tong School. In close proximity to Catholic High, CHIJ St. Nicholas Girls', Raffles Institution, and Eunoia JC.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ONEMAP 3D GEOSPATIAL MAP ================= -->
-  <section id="location-map" class="py-24 bg-slate-900 text-white relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-[#c5a47e]">Authoritative Location Intelligence</span>
-          <h2 class="text-3xl sm:text-4xl font-serif-luxury text-white mt-2">Singapore OneMap Geospatial Map</h2>
-          <p class="text-slate-400 mt-2 text-sm max-w-xl">
-            Integrated with Singapore Land Authority (SLA) authoritative OneMap tiles with interactive landmarks and transport nodes.
-          </p>
-        </div>
-        <!-- Quick Layer Toggle buttons -->
-        <div class="flex gap-2 mt-4 md:mt-0">
-          <button onclick="setMapLayer('Default')" class="px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium text-slate-200 border border-white/10 transition">Default SLA</button>
-          <button onclick="setMapLayer('Night')" class="px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium text-slate-200 border border-white/10 transition">Night Mode</button>
-          <button onclick="setMapLayer('Grey')" class="px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium text-slate-200 border border-white/10 transition">Minimal Grey</button>
-        </div>
-      </div>
-
-      <!-- Map Container -->
-      <div class="relative shadow-2xl rounded-2xl overflow-hidden border border-slate-700">
-        <div id="onemap-container"></div>
-        <div class="absolute bottom-4 left-4 z-[500] bg-slate-950/85 backdrop-blur-md p-3.5 rounded-xl border border-white/10 text-xs text-slate-300 max-w-xs shadow-lg">
-          <div class="font-bold text-white mb-1.5 flex items-center gap-1.5">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> 1, 3, 5, 7, 9, 11 Bright Hill Drive
-          </div>
-          <p class="text-[11px] leading-tight text-slate-400">Bounded by Upper Thomson Rd & Sin Ming Ave. Direct access to Thomson-East Coast Line.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 86 RESORT FACILITIES (SOURCE 1 REPLICATION) ================= -->
-  <section id="siteplan" class="py-24 bg-white border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#c5a47e]">Comprehensive Site Plan</span>
-        <h2 class="text-3xl sm:text-4xl font-serif-luxury text-slate-900 mt-2">86 Curated Resort Facilities</h2>
-        <p class="text-slate-600 mt-3 text-sm">
-          Spanning three dedicated lifestyle clubhouses: The Island Club, Grand Clubhouse, and Wellness Club.
-        </p>
-
-        <!-- Facilities Zone Switcher -->
-        <div class="flex flex-wrap justify-center gap-3 mt-8">
-          <button onclick="filterFacilities('all')" class="fac-tab active px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-[#0f1c2e] text-white transition">All 86 Facilities</button>
-          <button onclick="filterFacilities('island')" class="fac-tab px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Island Club (#1-32)</button>
-          <button onclick="filterFacilities('grand')" class="fac-tab px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Grand Clubhouse (#33-64)</button>
-          <button onclick="filterFacilities('wellness')" class="fac-tab px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Wellness Club (#65-86)</button>
-        </div>
-      </div>
-
-      <!-- Facility Tags Grid -->
-      <div id="facilities-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 text-xs">
-        <!-- Dynamically injected via JavaScript -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= INDICATIVE PRICING & UNIT SELECTOR ================= -->
-  <section id="pricing" class="py-24 bg-[#0f1c2e] text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#c5a47e]">Transparent Launch Economics</span>
-        <h2 class="text-3xl sm:text-4xl font-serif-luxury mt-2">Indicative Price Guidance</h2>
-        <p class="text-slate-300 mt-3 text-sm">
-          Real-time unit selector and indicative developer pricing breakdown based on recent market land acquisitions and early estimates.
-        </p>
-      </div>
-
-      <!-- Unit Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-
-        <!-- 2-BEDROOM PREMIUM + STUDY (Featured in Source 3) -->
-        <div class="p-6 rounded-2xl bg-white/5 border-2 border-[#c5a47e] backdrop-blur-sm relative">
-          <div class="absolute -top-3.5 right-6 px-3 py-1 bg-[#c5a47e] text-[#0f1c2e] font-bold text-[10px] uppercase tracking-widest rounded-full">
-            Featured 3D Showflat Unit
-          </div>
-          <span class="text-xs text-[#c5a47e] font-semibold uppercase tracking-wider">Type BPS1 • Classic Collection</span>
-          <h3 class="text-2xl font-serif-luxury font-bold text-white mt-1">2-BR Premium + Study</h3>
-          <p class="text-slate-400 text-xs mt-1">732 sqft (68 sqm) • High-Efficiency Dumbbell</p>
-          
-          <div class="my-6 py-4 border-y border-white/10">
-            <div class="text-xs text-slate-400">Indicative Launch Price</div>
-            <div class="text-3xl font-serif-luxury text-[#c5a47e] font-bold mt-1">From $1.95M</div>
-            <div class="text-[11px] text-slate-400 mt-1">Starting from ~$2,663 psf</div>
-          </div>
-
-          <ul class="space-y-2 text-xs text-slate-300 mb-6">
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Full frontage living room & bedrooms</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Integrated study room with window</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Smeg premium kitchen appliances</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Est. Loan: ~$6,560 / month</li>
-          </ul>
-
-          <a href="https://wa.me/6590000000?text=I%20am%20interested%20in%20Type%20BPS1%202-Bedroom%20Premium%20Study%20pricing." 
-             target="_blank" 
-             class="block w-full text-center py-3 bg-[#c5a47e] hover:bg-[#a98357] text-[#0f1c2e] font-bold uppercase tracking-wider text-xs rounded-xl transition">
-            Request Unit Price Breakdown
-          </a>
-        </div>
-
-        <!-- 3-BEDROOM PREMIUM -->
-        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-          <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Type CP1 • Classic Collection</span>
-          <h3 class="text-2xl font-serif-luxury font-bold text-white mt-1">3-BR Premium</h3>
-          <p class="text-slate-400 text-xs mt-1">1,055 sqft (98 sqm) • Ideal Family Layout</p>
-          
-          <div class="my-6 py-4 border-y border-white/10">
-            <div class="text-xs text-slate-400">Indicative Launch Price</div>
-            <div class="text-3xl font-serif-luxury text-white font-bold mt-1">From $2.78M</div>
-            <div class="text-[11px] text-slate-400 mt-1">Starting from ~$2,635 psf</div>
-          </div>
-
-          <ul class="space-y-2 text-xs text-slate-300 mb-6">
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Naturally ventilated bathrooms & kitchen</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Dedicated yard & utility / helper room</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Spacious extended balcony</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Est. Loan: ~$9,360 / month</li>
-          </ul>
-
-          <a href="https://wa.me/6590000000?text=I%20am%20interested%20in%203-Bedroom%20Premium%20pricing." 
-             target="_blank" 
-             class="block w-full text-center py-3 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-wider text-xs rounded-xl border border-white/20 transition">
-            Enquire 3-Bedroom Stack
-          </a>
-        </div>
-
-        <!-- 4-BEDROOM PREMIUM (PRIVATE LIFT) -->
-        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-          <span class="text-xs text-[#c5a47e] font-semibold uppercase tracking-wider">Type DP1 (L) • Luxury Collection</span>
-          <h3 class="text-2xl font-serif-luxury font-bold text-white mt-1">4-BR Premium (Private Lift)</h3>
-          <p class="text-slate-400 text-xs mt-1">1,367 – 1,485 sqft • 30-Storey Tower</p>
-          
-          <div class="my-6 py-4 border-y border-white/10">
-            <div class="text-xs text-slate-400">Indicative Launch Price</div>
-            <div class="text-3xl font-serif-luxury text-white font-bold mt-1">From $3.80M</div>
-            <div class="text-[11px] text-slate-400 mt-1">Starting from ~$2,780 psf</div>
-          </div>
-
-          <ul class="space-y-2 text-xs text-slate-300 mb-6">
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Private lift lobby access directly to unit</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Imported marble flooring & Miele suite</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Master suite walk-in wardrobe</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#c5a47e]"></i> Est. Loan: ~$12,800 / month</li>
-          </ul>
-
-          <a href="https://wa.me/6590000000?text=I%20am%20interested%20in%204-Bedroom%20Private%20Lift%20pricing." 
-             target="_blank" 
-             class="block w-full text-center py-3 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-wider text-xs rounded-xl border border-white/20 transition">
-            Enquire 4-Bedroom Stack
-          </a>
-        </div>
-
-      </div>
-
-      <!-- Quick Interactive Mortgage Estimator Widget -->
-      <div class="p-8 rounded-2xl bg-white/5 border border-white/10 max-w-4xl mx-auto text-center">
-        <h4 class="font-serif-luxury text-xl font-bold mb-2">Singapore Progressive Payment & Loan Calculator</h4>
-        <p class="text-slate-400 text-xs mb-6">Assumes 75% Bank Loan, 30-Year Tenure at standard benchmark interest (3.5% p.a.).</p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-          <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-            <div class="text-[11px] text-slate-400">5% Cash Booking Fee</div>
-            <div class="text-lg font-bold text-[#c5a47e] mt-1">$97,500 – $190,000</div>
-          </div>
-          <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-            <div class="text-[11px] text-slate-400">15% Signing Fee (CPF/Cash)</div>
-            <div class="text-lg font-bold text-[#c5a47e] mt-1">$292,500 – $570,000</div>
-          </div>
-          <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-            <div class="text-[11px] text-slate-400">Progressive Stages</div>
-            <div class="text-lg font-bold text-white mt-1">Paid in Stages to 2031</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 3D FLOOR PLANS (SOURCE 3 SHOWCASE) ================= -->
-  <section id="floorplans" class="py-24 bg-slate-50 border-b border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#c5a47e]">Architectural Precision</span>
-        <h2 class="text-3xl sm:text-4xl font-serif-luxury text-slate-900 mt-2">Interactive 3D Cutaway Floor Plan</h2>
-        <p class="text-slate-600 mt-3 text-sm">
-          Examine the intelligent spatial layout of Type BPS1 (2-Bedroom Premium + Study, 732 sqft), designed with zero wasted hallway space and full bedroom frontage.
-        </p>
-      </div>
-
-      <div class="bg-white p-6 sm:p-10 rounded-3xl shadow-xl border border-slate-200/80 max-w-5xl mx-auto">
-        <div class="flex flex-col lg:flex-row gap-8 items-center">
-          
-          <!-- Floor Plan Image Viewer Placeholder (Linked to Source 3) -->
-          <div class="w-full lg:w-3/5 bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 relative group">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" 
-                 alt="Type BPS1 3D Floor Plan Cutaway" 
-                 class="w-full h-auto object-cover transform group-hover:scale-105 transition duration-500" 
-                 id="floorplan-image" />
-            <div class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">
-              Type BPS1 • 68 sqm / 732 sqft
-            </div>
-          </div>
-
-          <!-- Layout Features Description -->
-          <div class="w-full lg:w-2/5 space-y-5 text-sm">
-            <div>
-              <span class="text-xs font-bold text-[#a98357] uppercase tracking-wider">Show Unit Highlight</span>
-              <h3 class="font-serif-luxury text-2xl font-bold text-slate-900 mt-1">2-Bedroom Premium + Study</h3>
-              <p class="text-slate-500 text-xs">Classic Collection • Blocks 1, 3, 9, 11</p>
-            </div>
-
-            <div class="space-y-3 border-t border-b border-slate-100 py-4 text-xs text-slate-600">
-              <div class="flex items-start gap-2.5">
-                <i class="fa-solid fa-arrows-left-right text-[#c5a47e] mt-0.5"></i>
-                <span><strong>Dumbbell Layout:</strong> Bedrooms on opposite sides for optimum acoustic privacy.</span>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <i class="fa-solid fa-laptop text-[#c5a47e] mt-0.5"></i>
-                <span><strong>Dedicated Study:</strong> Natural light, easily configured as a home office or nursery.</span>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <i class="fa-solid fa-utensils text-[#c5a47e] mt-0.5"></i>
-                <span><strong>Enclosable Kitchen:</strong> Complete with Smeg induction cooker, oven, and washer-dryer.</span>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <i class="fa-solid fa-shower text-[#c5a47e] mt-0.5"></i>
-                <span><strong>2 Full Bathrooms:</strong> En-suite master bathroom plus guest bathroom.</span>
-              </div>
-            </div>
-
-            <div class="pt-2">
-              <a href="https://wa.me/6590000000?text=Please%20send%20me%20the%20full%20PDF%20e-Brochure%20and%20all%20floor%20plans%20for%20Thomson%20Reserve." 
-                 target="_blank"
-                 class="inline-flex items-center justify-center gap-2 w-full py-3.5 bg-[#0f1c2e] hover:bg-slate-800 text-white font-bold uppercase tracking-wider text-xs rounded-xl transition shadow-md">
-                <i class="fa-regular fa-file-pdf"></i>
-                <span>Download Complete Floor Plan Booklet</span>
-              </a>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= VVIP PREVIEW BOOKING FORM ================= -->
-  <section class="py-24 bg-white">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <div class="p-8 sm:p-12 rounded-3xl bg-slate-50 border border-slate-200/80 shadow-xl text-center">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#a98357]">Direct Developer Priority</span>
-        <h2 class="text-3xl font-serif-luxury text-slate-900 mt-2">Book Your VVIP Showflat Preview</h2>
-        <p class="text-slate-600 text-xs sm:text-sm mt-3 leading-relaxed">
-          Register now for the preview starting October 2026. Secure direct developer pricing, priority unit selection, and exclusive showflat access.
-        </p>
-
-        <form onsubmit="handleRegistration(event)" class="mt-8 space-y-4 text-left">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Full Name</label>
-              <input type="text" id="reg-name" required placeholder="John Tan" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-[#c5a47e] outline-none" />
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Contact Number</label>
-              <input type="tel" id="reg-phone" required placeholder="+65 9123 4567" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-[#c5a47e] outline-none" />
-            </div>
-          </div>
+      <!-- Stacking Grid Wrapper -->
+      <div class="bg-[#0f1c2e] p-6 rounded-2xl border border-white/10">
+        <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
           <div>
-            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Preferred Unit Layout</label>
-            <select id="reg-unit" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-[#c5a47e] outline-none bg-white">
-              <option value="2-Bedroom (592 sqft)">2-Bedroom (592 sqft)</option>
-              <option value="2-Bedroom Premium + Study (732 sqft)" selected>2-Bedroom Premium + Study (732 sqft)</option>
-              <option value="3-Bedroom Premium (1,055 sqft)">3-Bedroom Premium (1,055 sqft)</option>
-              <option value="4-Bedroom Private Lift (1,367 sqft)">4-Bedroom Premium Private Lift (1,367 sqft)</option>
-              <option value="5-Bedroom Suite (1,808 sqft)">5-Bedroom Suite (1,808 sqft)</option>
-            </select>
+            <h2 id="current-block-title" class="font-luxury text-xl font-bold text-white">Block 1 — Classic Collection</h2>
+            <p class="text-xs text-slate-400">Showing Stacks #01 to #08 • Click any unit to open the details & price calculator</p>
           </div>
-          <button type="submit" class="w-full py-4 bg-[#c5a47e] hover:bg-[#a98357] text-[#0f1c2e] font-bold uppercase tracking-wider text-xs rounded-xl transition shadow-lg mt-4 flex items-center justify-center gap-2">
-            <i class="fa-brands fa-whatsapp text-lg"></i>
-            <span>Confirm & WhatsApp Priority Access</span>
-          </button>
-          <p class="text-[11px] text-slate-400 text-center mt-3">No spam. Direct developer sales team communication. Zero buyer commission.</p>
-        </form>
+          <div class="text-right">
+            <span class="text-xs text-[#c5a47e] font-bold">21 Storeys • 8 Units per Floor</span>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <div class="min-w-[720px]" id="stacking-grid-container">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 2: ONEMAP 3D GEOSPATIAL MAP ================= -->
+    <section id="view-onemap" class="hidden space-y-6">
+      <div class="bg-[#0f1c2e] p-4 rounded-2xl border border-white/10 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="font-luxury text-lg font-bold text-white">Singapore OneMap (SLA) 3D Geospatial Engine</h2>
+          <p class="text-xs text-slate-400">Boundary bounded by Sin Ming Ave, Upper Thomson Rd & Bright Hill Dr</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="setOneMapStyle('Default')" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white">Default SLA</button>
+          <button onclick="setOneMapStyle('Night')" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white">Night View</button>
+          <button onclick="setOneMapStyle('Grey')" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white">Minimal Grey</button>
+        </div>
+      </div>
+
+      <div class="relative shadow-2xl rounded-2xl overflow-hidden border border-white/10">
+        <div id="onemap-canvas"></div>
+      </div>
+
+      <!-- Amenity Distances Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-[#0f1c2e] p-4 rounded-xl border border-white/10">
+          <div class="text-[#c5a47e] text-xs font-bold uppercase mb-1"><i class="fa-solid fa-train-subway mr-1"></i> Transit Node</div>
+          <div class="text-base font-bold text-white">Upper Thomson MRT (TE8)</div>
+          <div class="text-xs text-slate-400 mt-1">Sheltered walk (~450m) • Direct to Orchard & CBD</div>
+        </div>
+        <div class="bg-[#0f1c2e] p-4 rounded-xl border border-white/10">
+          <div class="text-[#c5a47e] text-xs font-bold uppercase mb-1"><i class="fa-solid fa-school mr-1"></i> Priority Education</div>
+          <div class="text-base font-bold text-white">Ai Tong School (&lt; 1 KM)</div>
+          <div class="text-xs text-slate-400 mt-1">Within 1 km home-school distance • High demand</div>
+        </div>
+        <div class="bg-[#0f1c2e] p-4 rounded-xl border border-white/10">
+          <div class="text-[#c5a47e] text-xs font-bold uppercase mb-1"><i class="fa-solid fa-tree mr-1"></i> Nature Reserve</div>
+          <div class="text-base font-bold text-white">MacRitchie Reservoir & TreeTop</div>
+          <div class="text-xs text-slate-400 mt-1">Direct connector to Lower Peirce & Bishan-AMK Park</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: 3D FLOORPLAN CUTAWAY EXPLORER ================= -->
+    <section id="view-floorplans" class="hidden space-y-6">
+      <div class="bg-[#0f1c2e] p-6 rounded-2xl border border-white/10">
+        <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-white/10 gap-4 mb-6">
+          <div>
+            <span class="text-xs uppercase font-bold text-[#c5a47e]">Interactive Spatial Layout</span>
+            <h2 class="font-luxury text-2xl font-bold text-white mt-1">Type BPS1 — 2-Bedroom Premium + Study (732 sq ft)</h2>
+            <p class="text-xs text-slate-400">Available across Blocks 1, 3, 5, 7 • Dumbbell Layout with Zero Hallway Waste</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-right">
+              <div class="text-[11px] text-slate-400">Indicative Guide</div>
+              <div class="text-xl font-bold text-[#c5a47e]">From $1,950,000</div>
+            </span>
+            <a href="https://wa.me/6590000000?text=Please%20send%20me%20the%20full%20set%20of%203D%20floor%20plans%20for%20Thomson%20Reserve." 
+               target="_blank"
+               class="px-4 py-2 bg-[#c5a47e] hover:bg-[#a98357] text-[#0b131f] font-bold text-xs uppercase tracking-wider rounded-xl transition">
+              Request Full E-Brochure
+            </a>
+          </div>
+        </div>
+
+        <!-- 3D Plan Representation & Hotspot Inspector -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Interactive 3D Cutaway Graphic Visualizer -->
+          <div class="lg:col-span-8 bg-[#09101a] p-4 rounded-2xl border border-white/10 relative overflow-hidden group">
+            <div class="w-full aspect-[16/10] bg-slate-900 rounded-xl relative flex items-center justify-center overflow-hidden border border-white/5">
+              
+              <!-- 3D Cutaway Room Blueprint Container -->
+              <div class="relative w-full h-full p-6 flex flex-col justify-between" style="background: radial-gradient(circle at center, #1a293e 0%, #0c1524 100%);">
+                
+                <!-- Room Highlights Layer -->
+                <div class="flex justify-between items-start text-xs">
+                  <!-- Balcony & AC Ledge Top -->
+                  <div class="p-3 bg-white/5 rounded-lg border border-white/10 w-2/3">
+                    <span class="text-[#c5a47e] font-bold block mb-1">Balcony & Living Room</span>
+                    <p class="text-[11px] text-slate-300">Generous 3.2m frontage opening toward landscape corridors</p>
+                  </div>
+                  <!-- Study Room -->
+                  <div class="p-3 bg-white/5 rounded-lg border border-white/10 w-1/4 text-right">
+                    <span class="text-[#c5a47e] font-bold block mb-1">Dedicated Study</span>
+                    <p class="text-[11px] text-slate-300">Natural light & window</p>
+                  </div>
+                </div>
+
+                <!-- Center: Dumbbell Wing Description -->
+                <div class="grid grid-cols-3 gap-4 my-auto text-center py-4">
+                  <div class="p-4 bg-blue-950/40 rounded-xl border border-blue-500/20">
+                    <div class="font-bold text-blue-300 text-xs">Bedroom 2 & Bath 2</div>
+                    <div class="text-[10px] text-slate-400 mt-1">Accommodates queen bed; adjacent bath</div>
+                  </div>
+                  <div class="p-4 bg-amber-950/30 rounded-xl border border-amber-500/30">
+                    <div class="font-bold text-amber-300 text-xs">Central Living & Dining</div>
+                    <div class="text-[10px] text-slate-400 mt-1">Efficient layout, no wasted hallway</div>
+                  </div>
+                  <div class="p-4 bg-emerald-950/40 rounded-xl border border-emerald-500/20">
+                    <div class="font-bold text-emerald-300 text-xs">Master Suite & En-Suite</div>
+                    <div class="text-[10px] text-slate-400 mt-1">Generous wardrobe run & master bath</div>
+                  </div>
+                </div>
+
+                <!-- Bottom: Kitchen & Foyer Entrance -->
+                <div class="flex justify-between items-end text-xs">
+                  <div class="p-3 bg-white/5 rounded-lg border border-white/10 w-1/2">
+                    <span class="text-[#c5a47e] font-bold block mb-1">Kitchen & Dry Area</span>
+                    <p class="text-[11px] text-slate-300">Smeg appliances, induction hob & built-in oven</p>
+                  </div>
+                  <div class="p-3 bg-white/5 rounded-lg border border-white/10 text-right">
+                    <span class="text-slate-400 text-[10px]">Entrance Foyer</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Badge Overlay -->
+              <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-[#c5a47e] border border-[#c5a47e]/30">
+                <i class="fa-solid fa-cube mr-1"></i> Source 3D Cutaway Render
+              </div>
+            </div>
+          </div>
+
+          <!-- Unit Specs Breakdown -->
+          <div class="lg:col-span-4 space-y-4">
+            <div class="bg-[#09101a] p-5 rounded-2xl border border-white/10">
+              <h3 class="font-luxury text-lg font-bold text-white mb-3">Unit Specifications</h3>
+              <dl class="space-y-2.5 text-xs">
+                <div class="flex justify-between py-1 border-b border-white/5">
+                  <dt class="text-slate-400">Total Area</dt>
+                  <dd class="font-bold text-white">732 sq ft (68 sqm)</dd>
+                </div>
+                <div class="flex justify-between py-1 border-b border-white/5">
+                  <dt class="text-slate-400">Orientation</dt>
+                  <dd class="font-bold text-white">North-South (Reservoir / Pool)</dd>
+                </div>
+                <div class="flex justify-between py-1 border-b border-white/5">
+                  <dt class="text-slate-400">Ceiling Height</dt>
+                  <dd class="font-bold text-white">2.85 m (Typical)</dd>
+                </div>
+                <div class="flex justify-between py-1 border-b border-white/5">
+                  <dt class="text-slate-400">Kitchen Type</dt>
+                  <dd class="font-bold text-white">Enclosable with Glass Sliding</dd>
+                </div>
+                <div class="flex justify-between py-1 border-b border-white/5">
+                  <dt class="text-slate-400">Fittings Brand</dt>
+                  <dd class="font-bold text-white">Smeg, Hansgrohe, Duravit</dd>
+                </div>
+              </dl>
+            </div>
+
+            <!-- Financial Projection for this layout -->
+            <div class="bg-[#09101a] p-5 rounded-2xl border border-white/10">
+              <h3 class="font-luxury text-sm font-bold text-[#c5a47e] mb-2">Estimated Entry Costs</h3>
+              <div class="text-xs space-y-2 text-slate-300">
+                <div class="flex justify-between">
+                  <span>5% Cash Booking:</span>
+                  <span class="font-bold text-white">~$97,500</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>15% Signing Fee (CPF/Cash):</span>
+                  <span class="font-bold text-white">~$292,500</span>
+                </div>
+                <div class="flex justify-between border-t border-white/10 pt-2 text-[#c5a47e]">
+                  <span>Est. Monthly Mortgage:</span>
+                  <span class="font-bold">~$6,560 / month</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 4: 86 FACILITIES DIRECTORY ================= -->
+    <section id="view-facilities" class="hidden space-y-6">
+      <div class="bg-[#0f1c2e] p-6 rounded-2xl border border-white/10">
+        <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-white/10 gap-4">
+          <div>
+            <span class="text-xs uppercase font-bold text-[#c5a47e]">Master Plan Facilities</span>
+            <h2 class="font-luxury text-2xl font-bold text-white mt-1">86 Curated Resort Facilities</h2>
+            <p class="text-xs text-slate-400">Categorized across Island Club, Grand Clubhouse & Wellness Club</p>
+          </div>
+          <!-- Filter Search & Category Buttons -->
+          <div class="flex flex-wrap items-center gap-2">
+            <input type="text" id="fac-search" oninput="searchFacilities()" placeholder="Search facility (e.g. Gym, Pool, Tennis)..." class="bg-[#09101a] border border-white/10 text-xs px-3 py-2 rounded-xl text-white outline-none focus:border-[#c5a47e]" />
+            <button onclick="filterFacilities('all')" class="fac-btn px-3 py-2 rounded-xl text-xs font-semibold bg-[#c5a47e] text-[#0b131f]" data-zone="all">All (86)</button>
+            <button onclick="filterFacilities('island')" class="fac-btn px-3 py-2 rounded-xl text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10" data-zone="island">Island Club (#1-32)</button>
+            <button onclick="filterFacilities('grand')" class="fac-btn px-3 py-2 rounded-xl text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10" data-zone="grand">Grand Clubhouse (#33-64)</button>
+            <button onclick="filterFacilities('wellness')" class="fac-btn px-3 py-2 rounded-xl text-xs font-semibold bg-white/5 text-slate-300 hover:bg-white/10" data-zone="wellness">Wellness Club (#65-86)</button>
+          </div>
+        </div>
+
+        <div id="facilities-list-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 pt-6 text-xs">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= SLIDE-OVER UNIT INSPECTOR DRAWER ================= -->
+  <div id="unit-drawer" class="fixed inset-y-0 right-0 w-full sm:w-[440px] bg-[#0c1524] border-l border-white/10 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+    <div class="p-6 overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10">
+        <div>
+          <span class="text-[10px] uppercase font-bold tracking-wider text-[#c5a47e] px-2 py-0.5 rounded bg-[#c5a47e]/20" id="drawer-tag">Available Unit</span>
+          <h3 class="font-luxury text-2xl font-bold text-white mt-2" id="drawer-unit-code">#15-03</h3>
+          <p class="text-xs text-slate-400" id="drawer-unit-type">Type BPS1 • 2-Bedroom Premium + Study</p>
+        </div>
+        <button onclick="closeDrawer()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Pricing Breakdown -->
+      <div class="py-5 border-b border-white/10">
+        <div class="text-xs text-slate-400">Indicative Price</div>
+        <div class="text-3xl font-luxury font-bold text-[#c5a47e] mt-1" id="drawer-price">$1,988,000</div>
+        <div class="text-xs text-slate-400 mt-1" id="drawer-psf">~$2,715 psf • 732 sq ft</div>
+      </div>
+
+      <!-- Specifications -->
+      <div class="py-4 space-y-2.5 text-xs text-slate-300 border-b border-white/10">
+        <div class="flex justify-between">
+          <span class="text-slate-400">Floor Level</span>
+          <span class="font-semibold text-white" id="drawer-level">Level 15 (High Floor)</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Facing & View</span>
+          <span class="font-semibold text-white" id="drawer-facing">North-Facing (Reservoir View)</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Balcony</span>
+          <span class="font-semibold text-white">Full Length with Planter</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Maintenance Fee (Est.)</span>
+          <span class="font-semibold text-white">~$320 / month</span>
+        </div>
+      </div>
+
+      <!-- Progressive Payment / Mortgage Estimate -->
+      <div class="py-4">
+        <h4 class="text-xs uppercase font-bold text-[#c5a47e] mb-3">Financing Breakdown (75% LTV, 30 Yrs)</h4>
+        <div class="bg-[#09101a] p-3 rounded-xl border border-white/5 space-y-2 text-xs">
+          <div class="flex justify-between">
+            <span class="text-slate-400">5% Booking Fee (Cash):</span>
+            <span class="font-bold text-white" id="drawer-downpay-5">$99,400</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-400">15% Signing Fee (CPF/Cash):</span>
+            <span class="font-bold text-white" id="drawer-downpay-15">$298,200</span>
+          </div>
+          <div class="flex justify-between text-[#c5a47e] border-t border-white/10 pt-2">
+            <span>Est. Monthly Mortgage (@ 3.5%):</span>
+            <span class="font-bold" id="drawer-mortgage">~$6,680 / mo</span>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="bg-[#0f1c2e] text-slate-400 py-12 text-xs border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
-      <div>
-        <div class="font-serif-luxury text-base text-[#c5a47e] font-bold tracking-wider">THOMSON RESERVE</div>
-        <p class="text-[11px] text-slate-500 mt-1">1, 3, 5, 7, 9, 11 Bright Hill Drive, Singapore (District 20)</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">Disclaimer: Artist impressions and indicative pricing are for marketing evaluation. Official figures subject to final confirmation.</p>
-      </div>
-      <div class="text-slate-500 text-[11px] text-center sm:text-right">
-        <span>Hosted via GitHub Pages • Powered by SLA OneMap</span>
-      </div>
+    <!-- Direct WhatsApp Enquiry Bar -->
+    <div class="p-6 bg-[#09101a] border-t border-white/10">
+      <a href="#" id="drawer-whatsapp-btn" target="_blank" class="w-full py-3.5 bg-[#c5a47e] hover:bg-[#a98357] text-[#0b131f] font-bold text-xs uppercase tracking-wider rounded-xl transition shadow flex items-center justify-center gap-2">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>Enquire on Unit via WhatsApp</span>
+      </a>
+      <p class="text-[10px] text-slate-500 text-center mt-2">Zero agent fees. Direct developer sales allocation.</p>
     </div>
-  </footer>
+  </div>
 
-  <!-- ================= INTERACTIVE APPLICATION JAVASCRIPT ================= -->
+  <!-- Overlay Backdrop -->
+  <div id="drawer-backdrop" onclick="closeDrawer()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
+
+  <!-- ================= SCRIPTS ================= -->
   <script>
-    // 1. OneMap SLA Leaflet Integration
-    let map;
-    let baseLayer;
-    const THOMSON_COORDS = [1.3601, 103.8340]; // Thomson Reserve / Bright Hill Dr coordinates
+    // 1. Stacking Data Generation Engine
+    const blocksData = {
+      'Blk 1': {
+        levels: 21,
+        stacks: ['01', '02', '03', '04', '05', '06', '07', '08'],
+        types: {
+          '01': { type: '2-BR Classic (B1)', size: 592, basePrice: 1560000, color: 'bg-blue-600' },
+          '02': { type: '2-BR Prem (BP1)', size: 678, basePrice: 1790000, color: 'bg-indigo-600' },
+          '03': { type: '2-BR Prem+Study (BPS1)', size: 732, basePrice: 1960000, color: 'bg-amber-600' },
+          '04': { type: '3-BR Classic (C1)', size: 947, basePrice: 2490000, color: 'bg-teal-600' },
+          '05': { type: '2-BR Prem+Study (BPS1)', size: 732, basePrice: 1970000, color: 'bg-amber-600' },
+          '06': { type: '3-BR Prem (CP1)', size: 1055, basePrice: 2790000, color: 'bg-emerald-600' },
+          '07': { type: '2-BR Classic (B1)', size: 592, basePrice: 1570000, color: 'bg-blue-600' },
+          '08': { type: '3-BR Prem+Study (CPS1)', size: 1152, basePrice: 3060000, color: 'bg-cyan-600' }
+        }
+      },
+      'Blk 3': {
+        levels: 21,
+        stacks: ['09', '10', '11', '12', '13', '14', '15', '16'],
+        types: {
+          '09': { type: '2-BR Prem+Study (BPS1)', size: 732, basePrice: 1965000, color: 'bg-amber-600' },
+          '10': { type: '3-BR Classic (C1)', size: 947, basePrice: 2500000, color: 'bg-teal-600' },
+          '11': { type: '2-BR Classic (B1)', size: 592, basePrice: 1565000, color: 'bg-blue-600' },
+          '12': { type: '3-BR Prem (CP1)', size: 1055, basePrice: 2800000, color: 'bg-emerald-600' },
+          '13': { type: '2-BR Prem (BP1)', size: 678, basePrice: 1800000, color: 'bg-indigo-600' },
+          '14': { type: '2-BR Prem+Study (BPS1)', size: 732, basePrice: 1975000, color: 'bg-amber-600' },
+          '15': { type: '3-BR Prem (CP1)', size: 1055, basePrice: 2810000, color: 'bg-emerald-600' },
+          '16': { type: '4-BR Classic (D1)', size: 1238, basePrice: 3390000, color: 'bg-rose-600' }
+        }
+      },
+      'Blk 5': {
+        levels: 21,
+        stacks: ['17', '18', '19', '20', '21', '22', '23', '24'],
+        types: {
+          '17': { type: '2-BR Classic (B1)', size: 592, basePrice: 1570000, color: 'bg-blue-600' },
+          '18': { type: '2-BR Prem+Study (BPS1)', size: 732, basePrice: 1970000, color: 'bg-amber-600' },
+          '19': { type: '3-BR Prem (CP1)', size: 1055, basePrice: 2820000, color: 'bg-emerald-600' },
+          '20': { type: '4-BR Classic (D1)', size: 1238, basePrice: 3400000, color: 'bg-rose-600' },
+          '21': { type: '2-BR Prem (BP1)', size: 678, basePrice: 1805000, color: 'bg-indigo-600' },
+          '22': { type: '2-BR Prem+Study (BPS1)', size: 732, basePrice: 1980000, color: 'bg-amber-600' },
+          '23': { type: '3-BR Classic (C1)', size: 947, basePrice: 2510000, color: 'bg-teal-600' },
+          '24': { type: '3-BR Prem+Study (CPS1)', size: 1152, basePrice: 3080000, color: 'bg-cyan-600' }
+        }
+      },
+      'Blk 7': {
+        levels: 21,
+        stacks: ['25', '26', '27', '28', '29', '30', '31', '32'],
+        types: {
+          '25': { type: '2-BR Prem+Study (BPS1)', size: 732, basePrice: 1975000, color: 'bg-amber-600' },
+          '26': { type: '3-BR Prem (CP1)', size: 1055, basePrice: 2830000, color: 'bg-emerald-600' },
+          '27': { type: '2-BR Classic (B1)', size: 592, basePrice: 1580000, color: 'bg-blue-600' },
+          '28': { type: '4-BR Classic (D1)', size: 1238, basePrice: 3420000, color: 'bg-rose-600' },
+          '29': { type: '2-BR Prem (BP1)', size: 678, basePrice: 1810000, color: 'bg-indigo-600' },
+          '30': { type: '2-BR Prem+Study (BPS1)', size: 732, basePrice: 1985000, color: 'bg-amber-600' },
+          '31': { type: '3-BR Classic (C1)', size: 947, basePrice: 2520000, color: 'bg-teal-600' },
+          '32': { type: '3-BR Prem+Study (CPS1)', size: 1152, basePrice: 3100000, color: 'bg-cyan-600' }
+        }
+      },
+      'Blk 9 (Luxury 30-Storey)': {
+        levels: 30,
+        stacks: ['33', '34', '35', '36'],
+        types: {
+          '33': { type: '4-BR Prem Lift (DP1)', size: 1367, basePrice: 3820000, color: 'bg-purple-600' },
+          '34': { type: '4-BR Prem Lift (DP1)', size: 1485, basePrice: 4120000, color: 'bg-purple-600' },
+          '35': { type: '5-BR Suite Lift (E1)', size: 1808, basePrice: 4990000, color: 'bg-fuchsia-700' },
+          '36': { type: '4-BR Prem Lift (DP1)', size: 1367, basePrice: 3840000, color: 'bg-purple-600' }
+        }
+      },
+      'Blk 11 (Luxury 30-Storey)': {
+        levels: 30,
+        stacks: ['37', '38', '39', '40'],
+        types: {
+          '37': { type: '4-BR Prem Lift (DP1)', size: 1485, basePrice: 4150000, color: 'bg-purple-600' },
+          '38': { type: '5-BR Suite Lift (E1)', size: 1808, basePrice: 5050000, color: 'bg-fuchsia-700' },
+          '39': { type: '4-BR Prem Lift (DP1)', size: 1367, basePrice: 3850000, color: 'bg-purple-600' },
+          '40': { type: '5-BR Suite Lift (E1)', size: 1808, basePrice: 5100000, color: 'bg-fuchsia-700' }
+        }
+      }
+    };
+
+    let currentBlock = 'Blk 1';
+
+    function renderStackingGrid() {
+      const config = blocksData[currentBlock];
+      const container = document.getElementById('stacking-grid-container');
+      container.innerHTML = '';
+
+      // Header Row with Stack Numbers
+      const headerRow = document.createElement('div');
+      headerRow.className = `grid grid-cols-${config.stacks.length + 1} gap-1 mb-2 text-center text-[11px] font-bold text-slate-400`;
+      headerRow.innerHTML = `<div class="p-1">Level</div>` + config.stacks.map(s => `<div class="p-1 bg-white/5 rounded">Stack ${s}</div>`).join('');
+      container.appendChild(headerRow);
+
+      // Floor Rows (Top floor down to Level 02)
+      for (let lvl = config.levels; lvl >= 2; lvl--) {
+        const row = document.createElement('div');
+        row.className = `grid grid-cols-${config.stacks.length + 1} gap-1 my-1 text-center text-[10px] items-center`;
+        
+        const lvlCell = `<div class="font-bold text-slate-400 text-xs">${String(lvl).padStart(2, '0')}</div>`;
+        let unitCells = '';
+
+        config.stacks.forEach(stack => {
+          const info = config.types[stack];
+          // Floor floor-increment calculation (~$6,000 per level up)
+          const unitPrice = info.basePrice + ((lvl - 2) * 6500);
+          const psf = Math.round(unitPrice / info.size);
+          const unitCode = `#${String(lvl).padStart(2, '0')}-${stack}`;
+
+          unitCells += `
+            <button onclick="openUnitDrawer('${unitCode}', '${info.type}', ${info.size}, ${unitPrice}, ${psf}, ${lvl})" 
+                    class="unit-cell p-1.5 rounded text-white ${info.color} hover:brightness-125 truncate flex flex-col justify-center">
+              <span class="font-bold tracking-tight">${unitCode}</span>
+              <span class="text-[9px] opacity-80">$${(unitPrice / 1000000).toFixed(2)}M</span>
+            </button>
+          `;
+        });
+
+        row.innerHTML = lvlCell + unitCells;
+        container.appendChild(row);
+      }
+    }
+
+    function changeBlock(blockName) {
+      currentBlock = blockName;
+      document.getElementById('current-block-title').innerText = `${blockName} — Elevation Matrix`;
+      document.querySelectorAll('.block-btn').forEach(btn => {
+        if (btn.dataset.block === blockName) {
+          btn.classList.add('bg-[#c5a47e]', 'text-[#0b131f]');
+          btn.classList.remove('bg-white/5', 'text-slate-300');
+        } else {
+          btn.classList.remove('bg-[#c5a47e]', 'text-[#0b131f]');
+          btn.classList.add('bg-white/5', 'text-slate-300');
+        }
+      });
+      renderStackingGrid();
+    }
+
+    // 2. Unit Inspector Slide-over Drawer
+    function openUnitDrawer(code, type, size, price, psf, lvl) {
+      document.getElementById('drawer-unit-code').innerText = code;
+      document.getElementById('drawer-unit-type').innerText = `${type} • ${size} sq ft`;
+      document.getElementById('drawer-price').innerText = `$${price.toLocaleString()}`;
+      document.getElementById('drawer-psf').innerText = `~$${psf.toLocaleString()} psf • ${size} sq ft`;
+      document.getElementById('drawer-level').innerText = `Level ${lvl} (${lvl >= 15 ? 'High Floor' : lvl >= 8 ? 'Mid Floor' : 'Low Pool Level'})`;
+      
+      const downpay5 = Math.round(price * 0.05);
+      const downpay15 = Math.round(price * 0.15);
+      // Monthly loan estimate (75% LTV, 3.5%, 30 yrs: factor is ~0.00449)
+      const loanAmount = price * 0.75;
+      const monthlyMortgage = Math.round(loanAmount * 0.0044904);
+
+      document.getElementById('drawer-downpay-5').innerText = `$${downpay5.toLocaleString()}`;
+      document.getElementById('drawer-downpay-15').innerText = `$${downpay15.toLocaleString()}`;
+      document.getElementById('drawer-mortgage').innerText = `~$${monthlyMortgage.toLocaleString()} / mo`;
+
+      const whatsappText = encodeURIComponent(`Hi, I am interested in Thomson Reserve unit ${code} (${type}, $${price.toLocaleString()}). Please send me the stack elevation, floor plan, and booking breakdown.`);
+      document.getElementById('drawer-whatsapp-btn').href = `https://wa.me/6590000000?text=${whatsappText}`;
+
+      document.getElementById('unit-drawer').classList.remove('translate-x-full');
+      document.getElementById('drawer-backdrop').classList.remove('hidden');
+    }
+
+    function closeDrawer() {
+      document.getElementById('unit-drawer').classList.add('translate-x-full');
+      document.getElementById('drawer-backdrop').classList.add('hidden');
+    }
+
+    // 3. View Switcher Engine
+    function switchView(viewName) {
+      ['stacking', 'onemap', 'floorplans', 'facilities'].forEach(v => {
+        document.getElementById(`view-${v}`).classList.add('hidden');
+        document.getElementById(`tab-${v}`).classList.remove('bg-[#c5a47e]', 'text-[#0b131f]');
+        document.getElementById(`tab-${v}`).classList.add('text-slate-300');
+      });
+      document.getElementById(`view-${viewName}`).classList.remove('hidden');
+      document.getElementById(`tab-${viewName}`).classList.add('bg-[#c5a47e]', 'text-[#0b131f]');
+      document.getElementById(`tab-${viewName}`).classList.remove('text-slate-300');
+
+      if (viewName === 'onemap') {
+        setTimeout(() => { map.invalidateSize(); }, 200);
+      }
+    }
+
+    // 4. OneMap Leaflet Setup
+    let map, baseOneMapLayer;
+    const THOMSON_COORDS = [1.3601, 103.8340];
 
     function initOneMap() {
-      map = L.map('onemap-container', {
+      map = L.map('onemap-canvas', {
         center: THOMSON_COORDS,
         zoom: 16,
         maxZoom: 18,
         minZoom: 11
       });
 
-      // Default OneMap SLA Tile URL
-      baseLayer = L.tileLayer('https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png', {
-        attribution: '<img src="https://www.onemap.gov.sg/web-assets/images/logo/om_logo.png" style="height:14px;width:14px;"/> OneMap | Singapore Land Authority',
+      baseOneMapLayer = L.tileLayer('https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png', {
+        attribution: 'OneMap | Singapore Land Authority (SLA)',
         maxZoom: 19
       }).addTo(map);
 
-      // Custom Icon for Thomson Reserve
-      const condoIcon = L.divIcon({
+      // Custom Condo Pin
+      const projectIcon = L.divIcon({
         className: 'custom-pin',
-        html: '<div style="background-color:#0f1c2e; border:2px solid #c5a47e; color:#c5a47e; padding:6px 10px; border-radius:20px; font-weight:bold; font-size:11px; white-space:nowrap; box-shadow:0 4px 10px rgba(0,0,0,0.3);"><i class="fa-solid fa-building"></i> Thomson Reserve</div>',
-        iconSize: [120, 30],
-        iconAnchor: [60, 15]
+        html: '<div style="background-color:#0f1c2e; border:2px solid #c5a47e; color:#c5a47e; padding:5px 9px; border-radius:16px; font-weight:bold; font-size:11px; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,0.4);"><i class="fa-solid fa-gem"></i> Thomson Reserve</div>',
+        iconSize: [130, 28],
+        iconAnchor: [65, 14]
       });
 
-      // Custom Icon for Upper Thomson MRT
+      L.marker(THOMSON_COORDS, { icon: projectIcon }).addTo(map)
+        .bindPopup('<b>Thomson Reserve</b><br>1-11 Bright Hill Drive<br>1,268 Units | District 20').openPopup();
+
+      // MRT Pin
       const mrtIcon = L.divIcon({
         className: 'custom-pin',
-        html: '<div style="background-color:#995400; color:#fff; padding:4px 8px; border-radius:12px; font-weight:bold; font-size:10px; white-space:nowrap;"><i class="fa-solid fa-train"></i> Upper Thomson MRT (TE8)</div>',
+        html: '<div style="background-color:#995400; color:#fff; padding:3px 8px; border-radius:12px; font-weight:bold; font-size:10px; white-space:nowrap;"><i class="fa-solid fa-train"></i> Upper Thomson MRT (TE8)</div>',
         iconSize: [140, 24],
         iconAnchor: [70, 12]
       });
+      L.marker([1.3544, 103.8329], { icon: mrtIcon }).addTo(map);
 
-      // Custom Icon for Ai Tong School
+      // School Pin
       const schoolIcon = L.divIcon({
         className: 'custom-pin',
-        html: '<div style="background-color:#1e3a8a; color:#fff; padding:4px 8px; border-radius:12px; font-weight:bold; font-size:10px; white-space:nowrap;"><i class="fa-solid fa-school"></i> Ai Tong School (&lt;1km)</div>',
+        html: '<div style="background-color:#1e3a8a; color:#fff; padding:3px 8px; border-radius:12px; font-weight:bold; font-size:10px; white-space:nowrap;"><i class="fa-solid fa-graduation-cap"></i> Ai Tong School (&lt;1km)</div>',
         iconSize: [130, 24],
         iconAnchor: [65, 12]
       });
-
-      // Place Markers
-      L.marker(THOMSON_COORDS, { icon: condoIcon }).addTo(map)
-        .bindPopup('<b>Thomson Reserve</b><br>1-11 Bright Hill Drive<br>1,268 Units | District 20').openPopup();
-
-      L.marker([1.3544, 103.8329], { icon: mrtIcon }).addTo(map);
       L.marker([1.3606, 103.8368], { icon: schoolIcon }).addTo(map);
 
       // 1km Radius Circle
@@ -535,106 +662,153 @@
       }).addTo(map);
     }
 
-    function setMapLayer(style) {
+    function setOneMapStyle(style) {
       if (!map) return;
-      map.removeLayer(baseLayer);
-      baseLayer = L.tileLayer(`https://www.onemap.gov.sg/maps/tiles/${style}/{z}/{x}/{y}.png`, {
+      map.removeLayer(baseOneMapLayer);
+      baseOneMapLayer = L.tileLayer(`https://www.onemap.gov.sg/maps/tiles/${style}/{z}/{x}/{y}.png`, {
         attribution: 'OneMap | SLA',
         maxZoom: 19
       }).addTo(map);
     }
 
-    // 2. Facilities Data Generation (Replicating Masterplan Source 1)
-    const facilitiesData = [
-      // Island Club (1-32)
+    // 5. 86 Facilities Data
+    const fullFacilities = [
+      // Island Club (#1-32)
       { id: 1, name: "Reflective Pool", zone: "island" },
       { id: 2, name: "Oak Lounge (Social Lounge 1)", zone: "island" },
       { id: 3, name: "Seating Deck", zone: "island" },
       { id: 4, name: "Cedar Room (Function Room 1)", zone: "island" },
       { id: 5, name: "Entertainment Room 1", zone: "island" },
+      { id: 6, name: "Changing Room", zone: "island" },
       { id: 7, name: "Cherry Room (Function Room 2)", zone: "island" },
       { id: 8, name: "Social Lawn", zone: "island" },
+      { id: 9, name: "Central Lawn", zone: "island" },
+      { id: 10, name: "Clubhouse Terrace", zone: "island" },
       { id: 11, name: "Island Pool", zone: "island" },
+      { id: 12, name: "Garden Lawn", zone: "island" },
+      { id: 13, name: "Relaxation Deck", zone: "island" },
       { id: 14, name: "Relaxation Bubble Pool", zone: "island" },
       { id: 15, name: "Waterbed", zone: "island" },
+      { id: 16, name: "Island Pool Deck", zone: "island" },
+      { id: 17, name: "Pool Cabana", zone: "island" },
+      { id: 18, name: "Infinity Lap Pool Deck", zone: "island" },
       { id: 19, name: "Infinity Lap Pool (50m)", zone: "island" },
       { id: 20, name: "Waterfall", zone: "island" },
       { id: 21, name: "Island Floating Bridge", zone: "island" },
+      { id: 22, name: "Grand Arrival", zone: "island" },
+      { id: 23, name: "Forest Grill Pavilion 1", zone: "island" },
+      { id: 24, name: "Forest Grill Pavilion 2", zone: "island" },
+      { id: 25, name: "Forest Grill Pavilion 3", zone: "island" },
+      { id: 26, name: "Forest Quest Playground", zone: "island" },
+      { id: 27, name: "Play Lawn", zone: "island" },
       { id: 28, name: "Forest Gym", zone: "island" },
+      { id: 29, name: "Forest Pavilion", zone: "island" },
       { id: 30, name: "Paw Garden", zone: "island" },
+      { id: 31, name: "Paw Garden Pavilion", zone: "island" },
+      { id: 32, name: "Forest Terrace", zone: "island" },
 
-      // Grand Clubhouse (33-64)
+      // Grand Clubhouse (#33-64)
       { id: 33, name: "Cascade Terrace", zone: "grand" },
+      { id: 34, name: "Cascade Cove", zone: "grand" },
+      { id: 35, name: "Zen Terrace", zone: "grand" },
       { id: 36, name: "Grand Function Room", zone: "grand" },
+      { id: 37, name: "Maple Room (Function Room 3)", zone: "grand" },
+      { id: 38, name: "Changing Room", zone: "grand" },
       { id: 39, name: "Golf Simulator", zone: "grand" },
       { id: 40, name: "Recreation Room", zone: "grand" },
-      { id: 42, name: "Little Explorer Nook (Play Room)", zone: "grand" },
+      { id: 41, name: "Little Canopy Room", zone: "grand" },
+      { id: 42, name: "Little Explorer Nook", zone: "grand" },
       { id: 43, name: "Main Gym (2nd Storey)", zone: "grand" },
       { id: 44, name: "Outdoor Yoga Deck", zone: "grand" },
       { id: 45, name: "Leisure Pool", zone: "grand" },
+      { id: 46, name: "Leisure Pool Deck", zone: "grand" },
       { id: 47, name: "Grand Lawn", zone: "grand" },
+      { id: 48, name: "Grand Lawn Pavilion", zone: "grand" },
+      { id: 49, name: "Sensory Play", zone: "grand" },
+      { id: 50, name: "Lookout Pavilion", zone: "grand" },
+      { id: 51, name: "Hammock Cove", zone: "grand" },
       { id: 52, name: "Kids Adventure Zone", zone: "grand" },
+      { id: 53, name: "Kids Pool", zone: "grand" },
+      { id: 54, name: "Social Garden", zone: "grand" },
+      { id: 55, name: "Family Deck", zone: "grand" },
+      { id: 56, name: "Aspen Room (Function Room 4)", zone: "grand" },
       { id: 57, name: "Olive Lounge (Social Lounge 2)", zone: "grand" },
+      { id: 58, name: "Changing Room", zone: "grand" },
+      { id: 59, name: "Entertainment Room 2", zone: "grand" },
+      { id: 60, name: "Pine Room (Function Room 5)", zone: "grand" },
+      { id: 61, name: "Canopy Pool Deck", zone: "grand" },
       { id: 62, name: "Canopy Lap Pool (50m)", zone: "grand" },
       { id: 63, name: "Firefly Riverine Garden", zone: "grand" },
+      { id: 64, name: "Serenity Lawn", zone: "grand" },
 
-      // Wellness Club (65-86)
+      // Wellness Club (#65-86)
       { id: 65, name: "Wellness Lawn", zone: "wellness" },
       { id: 66, name: "Wellness Pod Pavilion 1", zone: "wellness" },
-      { id: 71, name: "Poolside BBQ Pavilion", zone: "wellness" },
+      { id: 67, name: "Wellness Pod Pavilion 2", zone: "wellness" },
+      { id: 68, name: "Wellness Pod Pavilion 3", zone: "wellness" },
+      { id: 69, name: "Herb Garden", zone: "wellness" },
+      { id: 70, name: "Poolside BBQ Pavilion 1", zone: "wellness" },
+      { id: 71, name: "Poolside BBQ Pavilion 2", zone: "wellness" },
       { id: 72, name: "Hydro Bay", zone: "wellness" },
       { id: 73, name: "Hydro Spa Pool", zone: "wellness" },
+      { id: 74, name: "Hydro Lounger", zone: "wellness" },
       { id: 75, name: "Active Pool", zone: "wellness" },
       { id: 76, name: "Hydro Gym", zone: "wellness" },
+      { id: 77, name: "Wellness Terrace", zone: "wellness" },
       { id: 78, name: "Wellness Studio", zone: "wellness" },
       { id: 79, name: "Pilates Studio", zone: "wellness" },
+      { id: 80, name: "Changing Room / Steam Room", zone: "wellness" },
       { id: 81, name: "Private Gym", zone: "wellness" },
+      { id: 82, name: "Changing Room / Steam Room", zone: "wellness" },
+      { id: 83, name: "Pavilion", zone: "wellness" },
       { id: 84, name: "Multi-Purpose Court 1", zone: "wellness" },
+      { id: 85, name: "Multi-Purpose Court 2", zone: "wellness" },
       { id: 86, name: "Tennis Court", zone: "wellness" }
     ];
 
-    function renderFacilities(filter = 'all') {
-      const container = document.getElementById('facilities-grid');
+    let currentZone = 'all';
+
+    function renderFacilitiesList(list) {
+      const container = document.getElementById('facilities-list-grid');
       container.innerHTML = '';
-
-      const filtered = filter === 'all' 
-        ? facilitiesData 
-        : facilitiesData.filter(f => f.zone === filter);
-
-      filtered.forEach(f => {
+      list.forEach(f => {
         const item = document.createElement('div');
-        item.className = 'p-3 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center gap-2 text-slate-700 hover:bg-[#fdf9f4] hover:border-[#c5a47e] transition';
-        item.innerHTML = `<span class="w-5 h-5 flex items-center justify-center rounded-full bg-[#0f1c2e] text-[#c5a47e] font-bold text-[10px] flex-shrink-0">${f.id}</span>
-                          <span class="truncate text-[11px] font-medium">${f.name}</span>`;
+        item.className = 'p-2.5 bg-[#09101a] border border-white/5 rounded-xl flex items-center gap-2 hover:border-[#c5a47e] transition';
+        item.innerHTML = `<span class="w-5 h-5 flex items-center justify-center rounded-full bg-[#c5a47e]/20 text-[#c5a47e] font-bold text-[10px] flex-shrink-0">${f.id}</span>
+                          <span class="truncate text-[11px] text-slate-300">${f.name}</span>`;
         container.appendChild(item);
       });
     }
 
     function filterFacilities(zone) {
-      document.querySelectorAll('.fac-tab').forEach(b => {
-        b.classList.remove('bg-[#0f1c2e]', 'text-white');
-        b.classList.add('bg-slate-100', 'text-slate-700');
+      currentZone = zone;
+      document.querySelectorAll('.fac-btn').forEach(btn => {
+        if (btn.dataset.zone === zone) {
+          btn.classList.add('bg-[#c5a47e]', 'text-[#0b131f]');
+          btn.classList.remove('bg-white/5', 'text-slate-300');
+        } else {
+          btn.classList.remove('bg-[#c5a47e]', 'text-[#0b131f]');
+          btn.classList.add('bg-white/5', 'text-slate-300');
+        }
       });
-      event.target.classList.remove('bg-slate-100', 'text-slate-700');
-      event.target.classList.add('bg-[#0f1c2e]', 'text-white');
-      renderFacilities(zone);
+      const filtered = zone === 'all' ? fullFacilities : fullFacilities.filter(f => f.zone === zone);
+      renderFacilitiesList(filtered);
     }
 
-    // 3. Form Submission to WhatsApp
-    function handleRegistration(e) {
-      e.preventDefault();
-      const name = encodeURIComponent(document.getElementById('reg-name').value);
-      const phone = encodeURIComponent(document.getElementById('reg-phone').value);
-      const unit = encodeURIComponent(document.getElementById('reg-unit').value);
-      
-      const whatsappURL = `https://wa.me/6590000000?text=Hi%2C%20I%20am%20${name}%20(${phone}).\%20I\%20would\%20like\%20to\%20register\%20for\%20the\%20Thomson\%20Reserve\%20Showflat\%20Preview.\%20Preferred\%20layout:\%20${unit}.`;
-      window.open(whatsappURL, '_blank');
+    function searchFacilities() {
+      const term = document.getElementById('fac-search').value.toLowerCase();
+      let filtered = currentZone === 'all' ? fullFacilities : fullFacilities.filter(f => f.zone === currentZone);
+      if (term) {
+        filtered = filtered.filter(f => f.name.toLowerCase().includes(term));
+      }
+      renderFacilitiesList(filtered);
     }
 
-    // Initialize scripts on load
+    // Initialize application on page load
     window.addEventListener('DOMContentLoaded', () => {
+      renderStackingGrid();
       initOneMap();
-      renderFacilities('all');
+      renderFacilitiesList(fullFacilities);
     });
   </script>
 </body>
