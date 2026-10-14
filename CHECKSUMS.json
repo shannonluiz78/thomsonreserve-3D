@@ -1,5 +1,5 @@
 {
-  "version": "9.8",
+  "version": "9.9",
   "files": [
     {
       "path": ".nojekyll",
@@ -688,8 +688,8 @@
     },
     {
       "path": "funnel-core.js",
-      "bytes": 13740,
-      "sha256": "2a16ccd547dc5920e6077a6fe94f3b6554e59683a325c7e22383b19139a31ff6"
+      "bytes": 13718,
+      "sha256": "b7eef58151e4de9f008f9c5213ce710513f7f175bb4c47c7cf435eaebd76379f"
     },
     {
       "path": "funnel-ui.js",
@@ -708,13 +708,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 709709,
-      "sha256": "8c5114ada9d54e57b2bedebab092d893389bf392c099e7e40132c8ff7032b826"
+      "bytes": 708999,
+      "sha256": "584e08994cacc0ba64c0fdf2e1143ef40f14586161219e3c44c6f8e281137ca8"
     },
     {
       "path": "library-ui.js",
-      "bytes": 3880,
-      "sha256": "37327c87aef91275c17c547a65aa6479073b7027577a2e4487fcad88e55f72c5"
+      "bytes": 3855,
+      "sha256": "b63a90ebb8130f03d8bb6fba7aa72dfa196cc5f098c995b00d367a953bb51379"
     },
     {
       "path": "licenses/SOURCE_NOTES.md",
@@ -738,8 +738,8 @@
     },
     {
       "path": "payment-ui.js",
-      "bytes": 15036,
-      "sha256": "29724a5939955d8ed02351f19337918916c3194196bec442f76083a2658173e3"
+      "bytes": 14862,
+      "sha256": "ed42d7a211223c4d4aee83ccd73e1abebabfdb3c8bbe967a5405d4a42b9abab0"
     },
     {
       "path": "payment.css",
@@ -753,13 +753,13 @@
     },
     {
       "path": "release.json",
-      "bytes": 301,
-      "sha256": "b86b251bc94cc8e0bc136a5699c2fb8b09448601d8d6289115bb918d525b2bc9"
+      "bytes": 299,
+      "sha256": "88eaa7dc65b775dddcde159d358e83ea66f817a63182b37c90158ba4c3726ed7"
     },
     {
       "path": "responsive-seo.css",
-      "bytes": 4623,
-      "sha256": "4de316c3cc227318fd5d260373aee95a48906ebd70c6d8d7af7cfd0a48e5bd65"
+      "bytes": 7818,
+      "sha256": "5df40f81edd1ff51338cd6774ec3aadc2d2476fb6557ad7f82f6f1ceab050f63"
     },
     {
       "path": "responsive-seo.js",
@@ -773,8 +773,8 @@
     },
     {
       "path": "SEO_AND_MOBILE_NOTES.md",
-      "bytes": 2661,
-      "sha256": "68d56071b65b6202cacced733a6eebd16320466c818684203e2644a5795ffefb"
+      "bytes": 4045,
+      "sha256": "d64c143dbeb25603c219ba59c86c031f9737d6e46255658b177c4c859eadd0f7"
     },
     {
       "path": "shadow-model.js",
@@ -803,13 +803,13 @@
     },
     {
       "path": "unit-library.js",
-      "bytes": 393744,
-      "sha256": "54e118ea4d9efc4db4c0df74bfe17bdf8fc0d912dfeeb147ce3155f113fa7a17"
+      "bytes": 393726,
+      "sha256": "919374fbd1561131fa1981f0fcff2e482abbf1a8cd55d826033d989d8eba617b"
     },
     {
       "path": "UPLOAD_GUIDE.md",
-      "bytes": 7678,
-      "sha256": "22118b701ee79ed88ff40bff06bd351210dd8c1c6e4b70999d7606eea491326c"
+      "bytes": 4159,
+      "sha256": "b858ad570a97e2d5f0ddc2a9f7c6f33a0dc827d5e110828df0ceee01601fa968"
     }
   ]
 }

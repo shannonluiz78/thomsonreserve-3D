@@ -23,7 +23,7 @@
   if(manual)return {amount:estimate(u,c),basis:'manual',official:false,source:'Buyer-entered PSF and floor premium',asOf:null,detail:'Manual planning assumption; not a developer quote.'};
   if(c.catalog?.activeModel==='rtd'){
    const amount=F.rtdPrice(u),modelPsf=2850+15*(Number(u.level)-1);
-   return {amount,basis:'rtd_psf',official:false,source:'Rex Tan / RTD illustrative PSF model',sourceURL:'https://rextan.sg/',asOf:'2026-10-13',baseFloor:1,basePsf:2850,psfIncrement:15,modelPsf,sqft:u.sqft,rounding:'nearest S$1,000',detail:'Reference model: (S$2,850 + S$15 × ('+u.level+' − 1)) × '+u.sqft+' sqft = '+sgd(modelPsf*u.sqft)+', rounded to nearest S$1,000: '+sgd(amount)+'. Estate-wide level-1 baseline; no block reset or facing premium. RTD illustration, not a developer quotation.'};
+   return {amount,basis:'rtd_psf',official:false,source:'Reference illustrative PSF model',sourceURL:'',asOf:'2026-10-13',baseFloor:1,basePsf:2850,psfIncrement:15,modelPsf,sqft:u.sqft,rounding:'nearest S$1,000',detail:'Reference model: (S$2,850 + S$15 × ('+u.level+' − 1)) × '+u.sqft+' sqft = '+sgd(modelPsf*u.sqft)+', rounded to nearest S$1,000: '+sgd(amount)+'. Estate-wide level-1 baseline; no block reset or facing premium. RTD illustration, not a developer quotation.'};
   }
   const row=c.catalog?.categories?.[category(u)],sqft=number(u.sqft);
   if(!row||!(number(row.entryPrice)>0)||!(number(row.referenceSqft)>0)||!(sqft>0))return {amount:null,basis:'unknown',official:false,detail:'No usable price evidence.'};
